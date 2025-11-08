@@ -7,7 +7,14 @@
       <p>Dashboard</p>
     </template>
     <template #tr-content>
-      <h1>Dashboard</h1>
+      <div class="w-full flex gap-2 items-center justify-end">
+        <e-btn variant="primary">
+          <span>
+            <i class="fa-solid fa-plus"></i>
+          </span>
+          <span> Add </span>
+        </e-btn>
+      </div>
     </template>
     <template #default>
       <h1>Dashboard</h1>
