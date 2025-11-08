@@ -1,6 +1,6 @@
+import './css/main.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import './assets/main.css'
 import Btn from './components/btn/btn.vue'
 import Input from './components/input/input.vue'
 import Select from './components/select/select.vue'

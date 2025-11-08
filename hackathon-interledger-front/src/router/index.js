@@ -8,6 +8,17 @@ const router = createRouter({
       name: 'home',
       component: () => import('@/views/Home.vue'),
     },
+    {
+      path: '/admin',
+      component: () => import('@/layouts/MainLayout.vue'),
+      children: [
+        {
+          path: 'dashboard',
+          name: 'dashboard',
+          component: () => import('@/views/Dashboard.vue'),
+        },
+      ],
+    },
   ],
 })
 
