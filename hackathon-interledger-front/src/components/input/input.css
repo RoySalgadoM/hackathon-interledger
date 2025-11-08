@@ -9,6 +9,9 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
+}
+
+.input-label:not([class*="text-"]) {
   color: var(--color-text-secondary);
 }
 

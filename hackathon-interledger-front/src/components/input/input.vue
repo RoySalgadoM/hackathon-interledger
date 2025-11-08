@@ -1,6 +1,11 @@
 <template>
   <div class="input-wrapper">
-    <label v-if="label" :for="inputId" class="input-label">
+    <label
+      v-if="label"
+      :for="inputId"
+      :class="['input-label', labelColor]"
+      :style="labelColor && !labelColor.startsWith('text-') ? { color: labelColor } : {}"
+    >
       {{ label }}
       <span v-if="required" class="input-required">*</span>
     </label>
@@ -95,6 +100,10 @@ const props = defineProps({
   autofocus: {
     type: Boolean,
     default: false,
+  },
+  labelColor: {
+    type: String,
+    default: null,
   },
 })
 
