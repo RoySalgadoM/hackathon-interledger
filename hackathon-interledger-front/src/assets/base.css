@@ -1,0 +1,42 @@
+
+:root {
+  /* Colores principales */
+  --color-primary: #000000;
+  --color-primary-hover: #454545;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #000000;
+  
+  /* Colores de bordes */
+  --color-border-default: #ccc;
+  --color-border-focus: #000000;
+  
+  /* Colores de fondo */
+  --color-bg-button: #000000;
+  --color-bg-button-hover: #454545;
+  
+  /* Sombras */
+  --shadow-focus: 0 0 0 1px rgba(0, 0, 0);
+}
+
+*,
+*::before,
+*::after {
+  font-weight: normal;
+}
+
+body {
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+}
