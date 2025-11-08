@@ -1,5 +1,5 @@
 <template>
-  <ContentLayout>
+  <e-content-layout>
     <template #title>
       <h1>Dashboard</h1>
     </template>
@@ -12,7 +12,7 @@
     <template #default>
       <h1>Dashboard</h1>
     </template>
-  </ContentLayout>
+  </e-content-layout>
 </template>
 
 <script setup></script>

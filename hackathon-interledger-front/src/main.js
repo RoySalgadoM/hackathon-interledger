@@ -5,6 +5,8 @@ import Btn from './components/btn/btn.vue'
 import Input from './components/input/input.vue'
 import Select from './components/select/select.vue'
 import Calendar from './components/calendar/calendar.vue'
+import ContentLayout from './layouts/ContentLayout.vue'
+import MainLayout from './layouts/MainLayout.vue'
 
 import App from './App.vue'
 import router from './router'
@@ -17,5 +19,6 @@ app.component('EBtn', Btn)
 app.component('EInput', Input)
 app.component('ESelect', Select)
 app.component('ECalendar', Calendar)
-
+app.component('EContentLayout', ContentLayout)
+app.component('EMainLayout', MainLayout)
 app.mount('#app')
