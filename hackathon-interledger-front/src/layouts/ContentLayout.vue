@@ -1,6 +1,6 @@
 <template>
-  <div class="flex-1 overflow-y-auto grid gap-2">
-    <div class="col-span-3 flex flex-col">
+  <div class="h-full flex flex-col gap-2">
+    <div class="flex flex-col flex-shrink-0">
       <div class="text-2xl font-bold">
         <slot name="title"></slot>
       </div>
@@ -8,10 +8,10 @@
         <slot name="description"></slot>
       </div>
     </div>
-    <div class="col-span-9 bg-red-500">
+    <div class="bg-red-500 flex-shrink-0">
       <slot name="tr-content"></slot>
     </div>
-    <div class="h-full w-full col-span-12 bg-amber-100">
+    <div class="flex-1 min-h-0 w-full bg-amber-100">
       <slot></slot>
     </div>
   </div>

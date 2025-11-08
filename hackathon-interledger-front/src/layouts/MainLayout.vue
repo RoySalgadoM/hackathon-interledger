@@ -43,14 +43,16 @@
 
     <!-- Main Content -->
     <main class="overflow-y-auto bg-white md:col-start-2">
-      <div class="p-4 md:p-6 lg:p-8">
+      <div class="h-full p-2">
         <router-view />
       </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white p-4 text-center md:col-span-2">
-      <p class="text-sm">eXos &copy; 2025</p>
+    <footer class="p-4 text-center md:col-span-2">
+      <p class="text-sm">
+        e<img src="@/assets/exos.png" alt="logo" class="inline-block w-4 h-6" />os &copy; 2025
+      </p>
     </footer>
   </div>
 </template>
