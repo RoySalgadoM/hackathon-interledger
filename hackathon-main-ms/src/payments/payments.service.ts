@@ -301,12 +301,9 @@ export class PaymentsService {
         throw dbError;
       }
 
-      response.status(302);
-      response.header(
-        'Location',
-        (outgoingPaymentGrant as any).interact.redirect
-      );
-      response.send();
+      return this.responseService.generateResponseOk(request, {
+        redirect_url: (outgoingPaymentGrant as any).interact.redirect
+      });
     } catch (err) {
       this.loggerService.printError(
         'Error in create payment',
