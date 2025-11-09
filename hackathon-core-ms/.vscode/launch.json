@@ -23,7 +23,7 @@
         "PLUGINS_PATH": "${workspaceFolder}/src/001/plugins/",
         "MODELS_PATH": "${workspaceFolder}/src/001/models/",
         "SCHEMAS_PATH": "${workspaceFolder}/src/001/schemas/",
-        "MONGODB_URL": "mongodb+srv://roy21rasm_db_user:rbqdsAOWqjh1dYZw@interledger.dmkvgs9.mongodb.net/",
+        "MONGODB_URL": "mongodb+srv://roy21rasm_db_user:rbqdsAOWqjh1dYZw@interledger.dmkvgs9.mongodb.net/interledger?retryWrites=true&w=majority",
         "HOST": "localhost",
         "PORT": "3000",
         "ENVIRONMENT": "dev",

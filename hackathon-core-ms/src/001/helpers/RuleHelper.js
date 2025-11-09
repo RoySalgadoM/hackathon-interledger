@@ -29,7 +29,7 @@ const createRule = async (uuid, rule, logManager) => {
 
     return ruleStructure;
   } catch (e) {
-    logger.printError(
+    logManager.printError(
       `:: ${uuid} :: ${constants.RESPONSE_MESSAGE_ERROR} :: ${e.message}`
     );
     return null;

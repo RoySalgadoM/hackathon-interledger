@@ -43,6 +43,8 @@ module.exports = {
         state: true
       });
 
+      await ruleSave.save();
+
       console.log('Rule Save', ruleSave);
 
       let response = {
@@ -54,6 +56,35 @@ module.exports = {
 
       logManager.printDebug(
         `END process in exampleBasic service`,
+        filename,
+        function_name,
+        response
+      );
+
+      return response;
+    } catch (e) {
+      logManager.printError('Error in exampleBasic', filename, e);
+      throw e;
+    }
+  },
+  getRules: async function (req, uuid) {
+    let logManager = req.logManager;
+    let function_name = 'getRules';
+
+    try {
+      logManager.printDebug(`START process getRules`, filename, function_name);
+
+      const rules = await models.rules.find().select('name description state');
+
+      let response = {
+        code: constants.RESPONSE_CODE_SUCCESS,
+        message: 'Success',
+        data: rules,
+        idRequest: this.uuid
+      };
+
+      logManager.printDebug(
+        `END process in getRules service`,
         filename,
         function_name,
         response
