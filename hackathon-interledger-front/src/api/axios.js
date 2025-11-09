@@ -12,11 +12,16 @@ const axiosInstance = axios.create({
 // Request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    // You can add auth tokens here if needed
-    // const token = localStorage.getItem('token')
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`
-    // }
+    // Add bearer token if available
+    const token = localStorage.getItem('authToken')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+
+    // Generate and add x-request-id UUID v4
+    const requestId = crypto.randomUUID()
+    config.headers['x-request-id'] = requestId
+
     return config
   },
   (error) => {

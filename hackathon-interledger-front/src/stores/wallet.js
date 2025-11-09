@@ -11,7 +11,7 @@ export const useWalletStore = defineStore('wallet', () => {
   const getWallets = async () => {
     try {
       loading.value = true
-      const response = await axiosInstance.get('/api/wallets')
+      const response = await axiosInstance.get('/api/v1/payments/wallet')
       // La respuesta viene con estructura { code, message, data: [...] }
       const walletsData = response.data.data || []
 

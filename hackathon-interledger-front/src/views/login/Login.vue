@@ -118,14 +118,14 @@
               </div>
               <div class="space-y-6">
                 <EInput
-                  v-model="username"
-                  label="Nombre"
+                  v-model="email"
+                  label="Email"
                   label-color="text-white"
-                  placeholder="Ingresa tu nombre"
+                  placeholder="Ingresa tu email"
                   required
                 />
                 <EInput
-                  v-model="inputValue"
+                  v-model="password"
                   type="password"
                   label-color="text-white"
                   label="Contraseña"
@@ -182,25 +182,47 @@
 </template>
 
 <script>
+import axiosInstance from '@/api/axios'
+import { useWalletStore } from '@/stores/wallet'
+
 export default {
   name: 'Login',
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       isLoading: false,
     }
   },
   computed: {},
   methods: {
-    handleLogin() {
+    async handleLogin() {
       this.isLoading = true
-      // Simular llamada API
-      setTimeout(() => {
-        this.isLoading = false
-        // Redirección después de login exitoso
+      try {
+        const response = await axiosInstance.get('/api/v1/administration/auth/login', {
+          params: {
+            email: this.email,
+            password: this.password,
+          },
+        })
+
+        // Save token to localStorage
+        const token = response.data.data.token
+        localStorage.setItem('authToken', token)
+
+        // Load wallets after successful login
+        const walletStore = useWalletStore()
+        await walletStore.getWallets()
+
+        // Navigate to products
         this.$router.push({ name: 'products' })
-      }, 1500)
+      } catch (error) {
+        console.error('Login error:', error)
+        // Show error message to user
+        alert('Error al iniciar sesión. Por favor verifica tus credenciales.')
+      } finally {
+        this.isLoading = false
+      }
     },
   },
 }

@@ -51,7 +51,10 @@
             <p class="text-sm text-text-secondary-2">Procesando pago...</p>
           </div>
 
-          <div v-else class="flex justify-center p-4 rounded-lg bg-white shadow-md">
+          <div
+            v-else-if="showQrReader"
+            class="flex justify-center p-4 rounded-lg bg-white shadow-md"
+          >
             <e-qr-code
               mode="read"
               :size="300"
@@ -161,12 +164,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { usePaymentStore } from '@/stores/payment'
 import { useCartStore } from '@/stores/cart'
+import { useWalletStore } from '@/stores/wallet'
 
 const paymentStore = usePaymentStore()
 const cartStore = useCartStore()
+const walletStore = useWalletStore()
 
 const validated = ref(false)
 const qrData = ref(null)
@@ -174,20 +179,14 @@ const qrError = ref(null)
 const selectedPaymentMethod = ref('')
 const showSuccessModal = ref(false)
 const showErrorModal = ref(false)
+const showQrReader = ref(false)
 
-const paymentMethods = [
-  {
-    value: 'https://ilp.interledger-test.dev/a48c31c8',
-    label: 'https://ilp.interledger-test.dev/a48c31c8',
-  },
-  {
-    value: 'https://ilp.interledger-test.dev/tlacoyos',
-    label: 'https://ilp.interledger-test.dev/tlacoyos',
-  },
-]
+// Use computed to reference wallet store state directly
+const paymentMethods = computed(() => walletStore.wallets)
 
 const handlePay = () => {
   validated.value = true
+  showQrReader.value = true
   // Limpiar datos anteriores cuando se inicia el escaneo
   qrData.value = null
   qrError.value = null
@@ -198,6 +197,9 @@ const handlePay = () => {
 
 const handleQRScanned = async (data) => {
   console.log('QR Code escaneado:', data)
+
+  // Close QR reader immediately after scanning
+  showQrReader.value = false
 
   try {
     qrError.value = null
