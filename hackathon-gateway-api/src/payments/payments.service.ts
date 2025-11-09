@@ -75,7 +75,7 @@ export class PaymentsService extends BaseService {
   ): Promise<void> {
     const targetUrl = this.buildMicroserviceUrl(
       this.configService.get('microservices.administrationMsUrl'),
-      '/payments/wallets'
+      '/payments/wallet'
     );
 
     return this.handleProxyRequest(

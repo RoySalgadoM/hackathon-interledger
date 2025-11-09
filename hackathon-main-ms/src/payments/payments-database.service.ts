@@ -1,13 +1,15 @@
 ﻿import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Payment, PaymentDocument } from '../common/schemas/payment';
+import { Wallet, WalletDocument } from '../common/schemas/wallet.schema';
 import { LoggerService } from '../common/logger/logger.service';
 
 @Injectable()
 export class PaymentsDatabaseService {
   constructor(
     @InjectModel(Payment.name) private paymentModel: Model<PaymentDocument>,
+    @InjectModel(Wallet.name) private walletModel: Model<WalletDocument>,
     private readonly loggerService: LoggerService
   ) {}
 
@@ -53,6 +55,35 @@ export class PaymentsDatabaseService {
     } catch (error) {
       this.loggerService.printError(
         'Error in updatePayment database method',
+        error instanceof Error ? error.stack : String(error)
+      );
+      throw error;
+    }
+  }
+
+  async getWallet(userId: string): Promise<WalletDocument[] | null> {
+    this.loggerService.printDebug(`Getting wallets for user_id: ${userId}`);
+
+    try {
+      const userObjectId = new Types.ObjectId(userId);
+      const wallets = await this.walletModel
+        .find({ user_id: userObjectId })
+        .exec();
+
+      if (wallets.length === 0) {
+        this.loggerService.printDebug(
+          `No wallets found for user_id: ${userId}`
+        );
+        return null;
+      }
+
+      this.loggerService.printInfo(
+        `Found ${wallets.length} wallet(s) for user_id: ${userId}`
+      );
+      return wallets;
+    } catch (error) {
+      this.loggerService.printError(
+        'Error in getWallet database method',
         error instanceof Error ? error.stack : String(error)
       );
       throw error;

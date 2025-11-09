@@ -275,6 +275,13 @@ export class PaymentsService {
           '&result=' +
           createPaymentDto.result;
 
+        await this.paymentsDatabaseService.updatePayment(
+          createPaymentDto.request_id,
+          {
+            payment_status: 'rejected'
+          }
+        );
+
         response.status(302);
         response.header('Location', uiSuccessUrl);
         response.send();
@@ -342,13 +349,36 @@ export class PaymentsService {
     }
   }
 
-  async getWallets(request: AuthenticatedFastifyRequest) {
+  async getWallet(request: AuthenticatedFastifyRequest) {
     try {
-      const privateKey = fs.readFileSync('private.key', 'utf-8');
+      const userInfo = request.headers['api-key-data'] as string;
+      const userInfoData = JSON.parse(userInfo);
+
+      const wallets = await this.paymentsDatabaseService.getWallet(
+        userInfoData.userId
+      );
+
+      if (!wallets) {
+        return this.responseService.generateResponseError(
+          request,
+          'Wallets not found'
+        );
+      }
+
+      return this.responseService.generateResponseOk(
+        request,
+        wallets,
+        'Wallets found successfully',
+        'Wallets found successfully'
+      );
     } catch (err) {
       this.loggerService.printError(
         'Error in get wallets',
         err instanceof Error ? err.stack : String(err)
+      );
+      return this.responseService.generateResponseError(
+        request,
+        err instanceof Error ? err.message : 'Error in get wallets'
       );
     }
   }

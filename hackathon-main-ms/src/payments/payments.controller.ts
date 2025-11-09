@@ -96,15 +96,15 @@ export class PaymentsController {
     );
   }
 
-  @Get('wallets')
-  @ApiOperation({ summary: 'Get wallets' })
+  @Get('wallet')
+  @ApiOperation({ summary: 'Get wallet' })
   @LogActivity({
     description: {
-      es: 'Obtener wallets',
-      en: 'Get wallets'
+      es: 'Obtener wallet',
+      en: 'Get wallet'
     }
   })
-  async getWallets(@Req() request: AuthenticatedFastifyRequest) {
-    return await this.paymentsService.getWallets(request);
+  async getWallet(@Req() request: AuthenticatedFastifyRequest) {
+    return await this.paymentsService.getWallet(request);
   }
 }

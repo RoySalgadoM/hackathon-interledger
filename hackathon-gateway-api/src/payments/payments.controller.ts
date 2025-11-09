@@ -47,7 +47,7 @@ export class PaymentsController {
     return this.paymentsService.paymentCallback(request, reply);
   }
 
-  @Get('/wallets')
+  @Get('/wallet')
   async getWallets(
     @Req() request: FastifyRequest,
     @Res() reply: FastifyReply
