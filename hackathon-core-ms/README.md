@@ -9,7 +9,7 @@ npm install
 - Empezar el ms
 
 ```bash
-npm 
+npm start
 ```
 
 
