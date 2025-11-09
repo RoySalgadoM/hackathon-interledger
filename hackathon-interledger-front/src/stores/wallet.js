@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import axiosInstance from '@/api/axios'
+import APIFactory from '@/api/APIFactory'
 
 export const useWalletStore = defineStore('wallet', () => {
   // State
@@ -11,7 +11,9 @@ export const useWalletStore = defineStore('wallet', () => {
   const getWallets = async () => {
     try {
       loading.value = true
-      const response = await axiosInstance.get('/api/v1/payments/wallet')
+      const response = await APIFactory.get({
+        path: 'payments/wallet',
+      })
       // La respuesta viene con estructura { code, message, data: [...] }
       const walletsData = response.data.data || []
 

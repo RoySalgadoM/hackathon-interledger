@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Create axios instance with base configuration
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3000/api/v1/',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -12,15 +12,19 @@ const axiosInstance = axios.create({
 // Request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Add bearer token if available
-    const token = localStorage.getItem('authToken')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+    // Add bearer token if available and not already set
+    if (!config.headers.Authorization) {
+      const token = localStorage.getItem('authToken')
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
     }
 
-    // Generate and add x-request-id UUID v4
-    const requestId = crypto.randomUUID()
-    config.headers['x-request-id'] = requestId
+    // Generate and add x-request-id UUID v4 if not already set
+    if (!config.headers['x-request-id']) {
+      const requestId = crypto.randomUUID()
+      config.headers['x-request-id'] = requestId
+    }
 
     return config
   },

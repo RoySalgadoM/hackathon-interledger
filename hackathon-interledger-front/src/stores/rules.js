@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import axiosInstance from '@/api/axios'
+import APIFactory from '@/api/APIFactory'
 
 export const useRulesStore = defineStore('rules', () => {
   // State
@@ -61,7 +61,10 @@ export const useRulesStore = defineStore('rules', () => {
   const createRule = async (payload) => {
     try {
       loading.value = true
-      const response = await axiosInstance.post('/api/rules', payload)
+      const response = await APIFactory.post({
+        path: 'preauth/rules',
+        body: payload,
+      })
       return response.data
     } catch (error) {
       console.error('Error creating rule:', error)
@@ -74,9 +77,17 @@ export const useRulesStore = defineStore('rules', () => {
   const getRuleById = async (id) => {
     try {
       loading.value = true
-      const response = await axiosInstance.get(`/api/rules/${id}`)
-      rule.value = response.data
-      return response.data
+      // El gateway no tiene endpoint específico para getById, obtener todas y filtrar
+      const response = await APIFactory.get({
+        path: 'preauth/rules',
+      })
+      const rules = response.data.data || response.data || []
+      const foundRule = rules.find((r) => r._id === id || r.id === id)
+      if (!foundRule) {
+        throw new Error(`Regla con ID ${id} no encontrada`)
+      }
+      rule.value = foundRule
+      return foundRule
     } catch (error) {
       console.error('Error fetching rule:', error)
       throw error
@@ -88,12 +99,14 @@ export const useRulesStore = defineStore('rules', () => {
   const updateRule = async (id, payload) => {
     try {
       loading.value = true
-      // Asegurar que el payload incluya el _id
       const updatedPayload = {
         ...payload,
         _id: id,
       }
-      const response = await axiosInstance.post('/api/rules', updatedPayload)
+      const response = await APIFactory.post({
+        path: 'preauth/rules',
+        body: updatedPayload,
+      })
       return response.data
     } catch (error) {
       console.error('Error updating rule:', error)
@@ -106,7 +119,9 @@ export const useRulesStore = defineStore('rules', () => {
   const getWhitelist = async () => {
     try {
       loading.value = true
-      const response = await axiosInstance.get('/api/whitelist/list')
+      const response = await APIFactory.get({
+        path: 'whitelist/list',
+      })
       whitelistOptions.value = response.data
       return response.data
     } catch (error) {
@@ -120,7 +135,10 @@ export const useRulesStore = defineStore('rules', () => {
   const deleteRule = async (id) => {
     try {
       loading.value = true
-      const response = await axiosInstance.delete(`/api/rules/${id}`)
+      // Intentar delete, si no está disponible lanzar error
+      const response = await APIFactory.delete({
+        path: `preauth/rules/${id}`,
+      })
       return response.data
     } catch (error) {
       console.error('Error deleting rule:', error)
@@ -133,7 +151,9 @@ export const useRulesStore = defineStore('rules', () => {
   const getRules = async () => {
     try {
       loading.value = true
-      const response = await axiosInstance.get('/api/rules')
+      const response = await APIFactory.get({
+        path: 'preauth/rules',
+      })
       // La respuesta viene con estructura { code, message, data: [...] }
       rules.value = response.data.data || []
       return response.data.data || []
@@ -152,7 +172,10 @@ export const useRulesStore = defineStore('rules', () => {
         _id: id,
         state: !ruleData.state,
       }
-      const response = await axiosInstance.post('/api/rules', payload)
+      const response = await APIFactory.post({
+        path: 'preauth/ruleState',
+        body: payload,
+      })
       return response.data
     } catch (error) {
       console.error('Error toggling rule state:', error)

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import axiosInstance from '@/api/axios'
+import APIFactory from '@/api/APIFactory'
 
 export const useWhitelistStore = defineStore('whitelist', () => {
   // State
@@ -12,7 +12,10 @@ export const useWhitelistStore = defineStore('whitelist', () => {
   const createWhitelist = async (payload) => {
     try {
       loading.value = true
-      const response = await axiosInstance.post('/api/whitelist', payload)
+      const response = await APIFactory.post({
+        path: 'whitelist',
+        body: payload,
+      })
       return response.data
     } catch (error) {
       console.error('Error creating whitelist:', error)
@@ -25,7 +28,9 @@ export const useWhitelistStore = defineStore('whitelist', () => {
   const getWhitelistById = async (id) => {
     try {
       loading.value = true
-      const response = await axiosInstance.get(`/api/whitelist/${id}`)
+      const response = await APIFactory.get({
+        path: `whitelist/${id}`,
+      })
       whitelist.value = response.data
       return response.data
     } catch (error) {
@@ -39,12 +44,14 @@ export const useWhitelistStore = defineStore('whitelist', () => {
   const updateWhitelist = async (id, payload) => {
     try {
       loading.value = true
-      // Asegurar que el payload incluya el _id
       const updatedPayload = {
         ...payload,
         _id: id,
       }
-      const response = await axiosInstance.post('/api/whitelist', updatedPayload)
+      const response = await APIFactory.post({
+        path: 'whitelist',
+        body: updatedPayload,
+      })
       return response.data
     } catch (error) {
       console.error('Error updating whitelist:', error)
@@ -57,7 +64,9 @@ export const useWhitelistStore = defineStore('whitelist', () => {
   const getWhitelists = async () => {
     try {
       loading.value = true
-      const response = await axiosInstance.get('/api/whitelist')
+      const response = await APIFactory.get({
+        path: 'whitelist',
+      })
       // La respuesta viene con estructura { code, message, data: [...] }
       whitelists.value = response.data.data || []
       return response.data.data || []
@@ -72,7 +81,9 @@ export const useWhitelistStore = defineStore('whitelist', () => {
   const deleteWhitelist = async (id) => {
     try {
       loading.value = true
-      const response = await axiosInstance.delete(`/api/whitelist/${id}`)
+      const response = await APIFactory.delete({
+        path: `whitelist/${id}`,
+      })
       return response.data
     } catch (error) {
       console.error('Error deleting whitelist:', error)

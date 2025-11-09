@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import axiosInstance from '@/api/axios'
+import APIFactory from '@/api/APIFactory'
 
 export const usePaymentStore = defineStore('payment', () => {
   // State
@@ -14,7 +14,10 @@ export const usePaymentStore = defineStore('payment', () => {
       loading.value = true
       error.value = null
 
-      const response = await axiosInstance.post('/payments/payment-request?', paymentData)
+      const response = await APIFactory.post({
+        path: '/api/v1/payments/payment-request',
+        body: paymentData,
+      })
 
       paymentResponse.value = response.data
       return response.data
