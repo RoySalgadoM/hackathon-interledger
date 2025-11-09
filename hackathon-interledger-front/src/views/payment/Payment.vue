@@ -9,15 +9,35 @@
     <template #default>
       <div class="flex flex-col gap-6 max-w-2xl mx-auto">
         <!-- Sección de método de pago -->
-        <div class="flex flex-col gap-4 p-6 rounded-lg bg-secondary border border-border-default">
+        <div class="flex flex-col gap-4 p-6">
           <h2 class="text-xl font-semibold text-(--color-text-secondary)">Método de pago</h2>
-          <e-select
-            v-model="selectedPaymentMethod"
-            :options="paymentMethods"
-            label="Selecciona un método de pago"
-            required
-            class="w-full"
-          />
+
+          <!-- Cards de wallets -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div
+              v-for="(wallet, index) in paymentMethods"
+              :key="index"
+              @click="selectWallet(wallet.value)"
+              :class="[
+                'cursor-pointer rounded-lg border p-5 transition-all relative overflow-hidden',
+                'bg-gray-200/50 backdrop-blur-md border-gray-300/50',
+                'shadow-lg',
+                selectedPaymentMethod === wallet.value
+                  ? 'ring-2 ring-offset-2 ring-primary bg-gray-300/50'
+                  : 'hover:bg-gray-300/50  hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-0.5',
+              ]"
+            >
+              <!-- Contenido del wallet -->
+              <div class="flex flex-col gap-2 relative z-10">
+                <h3 class="text-lg font-semibold text-(--color-text-secondary) m-0">
+                  {{ wallet.label }}
+                </h3>
+                <p class="text-sm text-text-secondary-2 m-0 break-all">
+                  {{ wallet.value }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Botón de pago -->
@@ -183,6 +203,10 @@ const showQrReader = ref(false)
 
 // Use computed to reference wallet store state directly
 const paymentMethods = computed(() => walletStore.wallets)
+
+const selectWallet = (value) => {
+  selectedPaymentMethod.value = value
+}
 
 const handlePay = () => {
   validated.value = true
