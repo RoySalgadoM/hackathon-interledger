@@ -3,7 +3,7 @@ const constants = require(process.env.UTILS_PATH + 'constants');
 
 const createRule = async (uuid, rule, logManager) => {
   try {
-    logManager.info(`:: ${uuid} :: Building rule`);
+    logManager.printInfo(`:: ${uuid} :: Building rule`);
     let ruleStructure = {};
     rule = rule.map((evaluation) => {
       let field = constants.EVALUATION_FIELDS[evaluation.elementData.field];
@@ -25,11 +25,11 @@ const createRule = async (uuid, rule, logManager) => {
       ruleStructure[field][requirementType] = { ...logicalAssertion };
     });
 
-    logManager.info(`:: ${uuid} :: Rule structure created`);
+    logManager.printInfo(`:: ${uuid} :: Rule structure created`);
 
     return ruleStructure;
   } catch (e) {
-    logManager.error(
+    logger.printError(
       `:: ${uuid} :: ${constants.RESPONSE_MESSAGE_ERROR} :: ${e.message}`
     );
     return null;
@@ -77,4 +77,4 @@ const createEvaluation = (uuid, field, action, value, channels, logManager) => {
 
   return rule;
 };
-module.exports = [createRule, createEvaluation];
+module.exports = { createRule, createEvaluation };

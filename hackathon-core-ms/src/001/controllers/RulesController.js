@@ -45,7 +45,11 @@ module.exports = [
       try {
         let initDate = moment();
         logManager.startProcess(req);
-        const response = await rulesService.createRule(req);
+        const response = await rulesService.createRule(
+          req,
+          req.logManager.getUUID()
+        );
+        //{ result: '' };
         logManager.endProcess(req, initDate);
         return h.response(response);
       } catch (error) {

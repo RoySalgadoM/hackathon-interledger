@@ -1,1 +1,5 @@
-module.exports = {};
+let rules = require('./rulesModel');
+
+module.exports = {
+  rules
+};

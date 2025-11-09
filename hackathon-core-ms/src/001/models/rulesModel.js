@@ -10,7 +10,8 @@ const RulesModel = new Schema(
     wallets: { type: Object, required: false },
     creationDate: { type: Date, required: true },
     lastUpdate: { type: Date, required: true },
-    structure: { type: Object, required: false }
+    structure: { type: Object, required: false },
+    state: { type: Boolean, required: false }
   },
   {
     versionKey: false,

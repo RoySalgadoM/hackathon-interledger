@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 //+LIBS
 const Path = require('path');
 //+UTILS
@@ -5,6 +6,7 @@ const constants = require(process.env.UTILS_PATH + 'constants');
 const models = require(process.env.MODELS_PATH);
 //+VARS
 let filename = '' + Path.basename(__filename);
+
 //+HELPS
 let ruleHelper = require(process.env.HELPERS_PATH + 'RuleHelper');
 
@@ -24,7 +26,11 @@ module.exports = {
         function_name
       );
 
-      let parsedRule = await ruleHelper.createRule(uuid, structure);
+      let parsedRule = await ruleHelper.createRule(
+        uuid,
+        structure,
+        req.logManager
+      );
 
       let ruleSave = new models.rules({
         name,
@@ -33,8 +39,11 @@ module.exports = {
         wallets,
         creationDate: new Date(),
         lastUpdate: new Date(),
-        structure
+        structure,
+        state: true
       });
+
+      console.log('Rule Save', ruleSave);
 
       let response = {
         code: constants.RESPONSE_CODE_SUCCESS,
@@ -42,12 +51,14 @@ module.exports = {
         data: req.payload,
         idRequest: this.uuid
       };
+
       logManager.printDebug(
         `END process in exampleBasic service`,
         filename,
         function_name,
         response
       );
+
       return response;
     } catch (e) {
       logManager.printError('Error in exampleBasic', filename, e);
