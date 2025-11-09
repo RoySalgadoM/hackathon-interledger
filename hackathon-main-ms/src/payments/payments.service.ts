@@ -127,8 +127,11 @@ export class PaymentsService {
           payment_status: 'rejected_by_preauth'
         });
 
-        return this.responseService.generateResponseConflict(
+        return this.responseService.generateResponseOk(
           request,
+          {
+            rejection_rule: preauthResponse.data.data.rule
+          },
           'Preauth validation failed'
         );
       }
