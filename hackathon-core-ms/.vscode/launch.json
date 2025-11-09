@@ -1,0 +1,53 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "exos-control-api",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/001/listener.js",
+      "outputCapture": "std",
+      "env": {
+        "NODE_LIBS_PATH": "${workspaceFolder}/node_modules/",
+        "HELPERS_PATH": "${workspaceFolder}/src/001/helpers/",
+        "SYSTEM_PATH": "${workspaceFolder}/",
+        "DOCUMENTATION_PATH": "${workspaceFolder}/documentation/",
+        "SECURITY_PATH": "${workspaceFolder}/src/001/security/",
+        "ROUTES_PATH": "${workspaceFolder}/src/001/routes/",
+        "ROUTE_PATH": "api/index",
+        "UTILS_PATH": "${workspaceFolder}/src/001/utils/",
+        "PLUGINS_PATH": "${workspaceFolder}/src/001/plugins/",
+        "MODELS_PATH": "${workspaceFolder}/src/001/models/",
+        "SCHEMAS_PATH": "${workspaceFolder}/src/001/schemas/",
+        "MONGODB_URL": "mongodb+srv://roy21rasm_db_user:rbqdsAOWqjh1dYZw@interledger.dmkvgs9.mongodb.net/",
+        "HOST": "localhost",
+        "PORT": "3000",
+        "ENVIRONMENT": "dev",
+        "LOG_LEVEL": "debug",
+        "SALT": "$2b$10$k9MoUgofIXCzyZNF4a8Vse",
+        "CONTEXT_API": "/api",
+        "URL_DGS_DOCUMENTOS_API": "https://dev.exosphere.mx/dgs/documents",
+        "URL_DGS_NOTIFICACIONES_API": "https://dev.exosphere.mx/dgs/notifications",
+        "URL_EXOS_CONTROL_UI": "https://exosphere-control-dev.exos.mx/control/",
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0",
+        "DD_ENV": "dev",
+        "DD_SERVICE": "exos-control-api",
+        "DD_LOGS_INJECTION": "true",
+        "DD_PROFILING_ENABLED": "true",
+        "DD_DBM_PROPAGATION_MODE": "full",
+        "MAX_TOKEN_AGE": "6000",
+        "SAML_ENTRY_POINT": "https://exos-tech.okta.com/home/exos-tech_controldev_1/0oalrxqv00863TNpB5d7/alnlrxwzvbz3vzv705d7",
+        "SAML_LOGOUT_URL": "https://exos-tech.okta.com/app/exos-tech_visiondev_1/exk8ulg8vdIv2pvfU5d7/slo/saml",
+        "SAML_ISSUER": "control-api-dev",
+        "SAML_SUCCESS_URL": "https://exosphere-control-dev.exos.mx/control/",
+        "SAML_SUCCESS_LOGOUT": "https://exosphere-control-dev.exos.mx/control/",
+        "SAML_ERROR_URL": "https://exosphere-control-dev.exos.mx/control/",
+        "COOKIE_PASSWORD": "zF3bkbqZ[ZCfG-XO)14a)jSz8YKCLN",
+      }
+    }
+  ]
+}
