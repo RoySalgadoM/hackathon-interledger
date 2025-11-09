@@ -25,11 +25,20 @@
       ]"
     >
       <div class="p-4">
-        <h2 class="text-lg font-semibold mb-4">Sidebar</h2>
+        <h2 class="text-lg font-semibold mb-4">Menú</h2>
         <nav class="space-y-2">
-          <a href="#" class="block p-2 rounded hover:bg-gray-200 transition-colors">Item 1</a>
-          <a href="#" class="block p-2 rounded hover:bg-gray-200 transition-colors">Item 2</a>
-          <a href="#" class="block p-2 rounded hover:bg-gray-200 transition-colors">Item 3</a>
+          <button
+            @click="navigateTo('rulesQuery')"
+            class="block w-full text-left p-2 rounded hover:bg-gray-200 transition-colors"
+          >
+            Reglas
+          </button>
+          <button
+            @click="navigateTo('whitelistQuery')"
+            class="block w-full text-left p-2 rounded hover:bg-gray-200 transition-colors"
+          >
+            Listas blancas
+          </button>
         </nav>
       </div>
     </aside>
@@ -132,10 +141,12 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
 
 const isSidebarOpen = ref(false)
 const cartStore = useCartStore()
+const router = useRouter()
 
 const products = computed(() => cartStore.products)
 
@@ -145,5 +156,10 @@ const formattedSubtotal = computed(() => {
 
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value
+}
+
+const navigateTo = (routeName) => {
+  router.push({ name: routeName })
+  isSidebarOpen.value = false
 }
 </script>

@@ -7,7 +7,7 @@
       <p>Administre las reglas del sistema</p>
     </template>
     <template #tr-content>
-      <div class="flex justify-end w-full">
+      <div class="w-full flex justify-end">
         <e-btn variant="primary" @click="handleAddRule">
           <span>
             <i class="fa-solid fa-plus"></i>
@@ -125,14 +125,6 @@ const handleToggleState = async (rule) => {
 .rules-query-container {
   width: 100%;
   padding: 20px 0;
-}
-
-.flex {
-  display: flex;
-}
-
-.justify-end {
-  justify-content: flex-end;
 }
 
 .loading-message {

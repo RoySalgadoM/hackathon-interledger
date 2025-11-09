@@ -37,6 +37,21 @@ const router = createRouter({
           name: 'rulesEdit',
           component: () => import('@/views/rules/RulesAdd.vue'),
         },
+        {
+          path: 'whitelist',
+          name: 'whitelistQuery',
+          component: () => import('@/views/whitelist/WhitelistQuery.vue'),
+        },
+        {
+          path: 'whitelist/add',
+          name: 'whitelistAdd',
+          component: () => import('@/views/whitelist/WhitelistAdd.vue'),
+        },
+        {
+          path: 'whitelist/:id',
+          name: 'whitelistEdit',
+          component: () => import('@/views/whitelist/WhitelistAdd.vue'),
+        },
       ],
     },
   ],
