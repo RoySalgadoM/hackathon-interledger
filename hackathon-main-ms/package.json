@@ -7,11 +7,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nest start",
-    "start:dev": "nest start --watch",
+    "start:dev": "nest start",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "start:clean": "powershell -ExecutionPolicy Bypass -File start-clean.ps1",
     "start:clean-advanced": "powershell -ExecutionPolicy Bypass -File start-clean-advanced.ps1",
+    "dev": "dotenv -e .env -- nest start --watch",
     "build": "nest build",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
@@ -59,6 +60,8 @@
     "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^8.46.0",
     "@typescript-eslint/parser": "^8.46.0",
+    "cross-env": "^7.0.3",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",

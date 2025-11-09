@@ -1,3 +1,11 @@
+import * as dotenv from 'dotenv';
+import { resolve } from 'path';
+
+// Cargar variables de entorno desde .env
+// Busca el archivo .env en la raíz del proyecto (tanto en desarrollo como en producción)
+const envPath = resolve(process.cwd(), '.env');
+dotenv.config({ path: envPath });
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {

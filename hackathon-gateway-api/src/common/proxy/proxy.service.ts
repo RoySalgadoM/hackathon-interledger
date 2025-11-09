@@ -343,7 +343,7 @@ export class ProxyService {
       params: request.query,
       validateStatus: () => true,
       maxRedirects: 0,
-      timeout: 30000,
+      timeout: 120000,
       withCredentials: true,
       maxContentLength: 50 * 1024 * 1024,
       maxBodyLength: 50 * 1024 * 1024,
