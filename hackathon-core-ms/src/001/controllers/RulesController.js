@@ -98,5 +98,50 @@ module.exports = [
         return h.response(response).code(600);
       }
     }
+  },
+  {
+    method: constants.POST,
+    path: `${process.env.CONTEXT_API}/ruleState`,
+    config: {
+      description: 'Evaluar una transaccion',
+      notes: ['Core', 'Evaluation'],
+      tags: [constants.API],
+      validate: {
+        payload: Joi.object({
+          id: Joi.string().allow(null).allow(''),
+          state: Joi.boolean()
+        }).unknown(),
+        failAction: async (req, h, err) => {
+          const logManager = util.initLogManager(req);
+          req.logManager = logManager;
+          const initDate = logManager.startProcess(req);
+          const response = await responseUtil.generateResponseFailAction(
+            req,
+            err
+          );
+          logManager.printError('Bad request', 'CoreController', response);
+          logManager.endProcess(req, initDate);
+          return h.response(response).code(400).takeover();
+        }
+      }
+    },
+    handler: async (req, h) => {
+      let logManager = util.initLogManager(req);
+      req.logManager = logManager;
+      try {
+        let initDate = moment();
+        logManager.startProcess(req);
+        const response = await rulesService.updateState(
+          req,
+          req.logManager.getUUID()
+        );
+        //{ result: '' };
+        logManager.endProcess(req, initDate);
+        return h.response(response);
+      } catch (error) {
+        let response = await responseUtil.generateResponseError(req, error);
+        return h.response(response).code(600);
+      }
+    }
   }
 ];

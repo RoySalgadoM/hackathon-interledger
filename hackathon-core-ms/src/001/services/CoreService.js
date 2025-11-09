@@ -43,30 +43,34 @@ module.exports = {
         );
         for (let rule of internalMessage.rules) {
           let ruleData = rule.rule;
-          logManager.printInfo('[!] EVALUATING RULE: ' + rule._id.$oid);
-          logManager.printInfo(
-            '[-] RULE: ' + inspect(ruleData, { depth: 4, colors: false })
-          );
+          if (rule.state) {
+            logManager.printInfo('[!] EVALUATING RULE: ' + rule._id.$oid);
+            logManager.printInfo(
+              '[-] RULE: ' + inspect(ruleData, { depth: 4, colors: false })
+            );
 
-          if (ruleData.days) {
-            internalMessage.result = coreHelper.evaluateDays(ruleData.days);
+            if (ruleData.days) {
+              internalMessage.result = coreHelper.evaluateDays(ruleData.days);
+            }
+
+            // AMOUNTS
+            // if (ruleData.amount_max || ruleData.amount_min) {
+            //   internalMessage = coreRules.amounts(internalMessage, ruleData);
+            //   if (internalMessage.result.rejected === true) {
+            //     break;
+            //   }
+            // }
+            // TIME
+            // if (ruleData.time) {
+            //   internalMessage = coreRules.time(internalMessage, ruleData);
+            //   if (internalMessage.result.rejected === true) {
+            //     break;
+            //   }
+            // }
+            // DAYS
+          } else {
+            logManager.printInfo('La regla tiene un estado desactivado');
           }
-
-          // AMOUNTS
-          // if (ruleData.amount_max || ruleData.amount_min) {
-          //   internalMessage = coreRules.amounts(internalMessage, ruleData);
-          //   if (internalMessage.result.rejected === true) {
-          //     break;
-          //   }
-          // }
-          // TIME
-          // if (ruleData.time) {
-          //   internalMessage = coreRules.time(internalMessage, ruleData);
-          //   if (internalMessage.result.rejected === true) {
-          //     break;
-          //   }
-          // }
-          // DAYS
         }
       } else {
         logManager.printInfo('La wallet no tiene reglas configuradas');

@@ -95,5 +95,45 @@ module.exports = {
       logManager.printError('Error in exampleBasic', filename, e);
       throw e;
     }
+  },
+  updateState: async function (req, uuid) {
+    let logManager = req.logManager;
+    let function_name = 'updateRuleState';
+    try {
+      let ruleId = req.payload.id;
+      let newState = req.payload.state;
+      logManager.printDebug(`START update state`, filename, function_name);
+
+      await models.rules.updateOne(
+        { _id: ruleId },
+        { $set: { state: newState } }
+      );
+
+      let response = {
+        code: constants.RESPONSE_CODE_SUCCESS,
+        message: 'Success',
+        data: null,
+        idRequest: this.uuid
+      };
+
+      logManager.printDebug(
+        `END process in getRules service`,
+        filename,
+        function_name,
+        response
+      );
+
+      return response;
+    } catch (e) {
+      logManager.printError('Error in update state', filename, e);
+      return {
+        code: constants.RESPONSE_CODE_FAIL,
+        message: 'Error',
+        data: {
+          message: e
+        },
+        idRequest: this.uuid
+      };
+    }
   }
 };
