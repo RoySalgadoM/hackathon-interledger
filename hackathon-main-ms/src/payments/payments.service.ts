@@ -355,7 +355,7 @@ export class PaymentsService {
     response: FastifyReply
   ) {
     try {
-      if (createPaymentDto.result !== 'success') {
+      if (createPaymentDto.result === 'grant_rejected') {
         let uiSuccessUrl =
           this.configService.get<string>('uiSuccessUrl') +
           '?request_id=' +
