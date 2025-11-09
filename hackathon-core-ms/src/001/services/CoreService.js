@@ -69,6 +69,7 @@ module.exports = {
             if (ruleData.days) {
               internalMessage.result = coreHelper.evaluateDays(ruleData.days);
               if (internalMessage.result.rejected === true) {
+                internalMessage.result.rule = rule.name;
                 break;
               }
             }
@@ -79,7 +80,8 @@ module.exports = {
                 ruleData.amount,
                 internalMessage.amountFormatted
               );
-              if (internalMessage.result.rejected === true) {
+              if (internalMessage.result.rejected == true) {
+                internalMessage.result.rule = rule.name;
                 break;
               }
             }

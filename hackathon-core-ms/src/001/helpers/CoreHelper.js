@@ -44,6 +44,7 @@ const evaluateDays = (daysRequirement) => {
         result.code = '101';
         result.message = 'DAY NOT PERMITTED';
         result.rejected = true;
+        result.rule = '';
         return result;
       }
     case 'should_not':
@@ -53,6 +54,7 @@ const evaluateDays = (daysRequirement) => {
         result.code = '101';
         result.message = 'DAY NOT PERMITTED';
         result.rejected = true;
+        result.rule = '';
         return result;
       }
     default:
@@ -100,6 +102,7 @@ const evaluateAmounts = (amountEvaluation, transactionAmount) => {
         result.code = '102';
         result.message = 'AMOUNT NOT PERMITTED';
         result.rejected = true;
+        result.rule = '';
         return result;
       }
     case 'must_not':
@@ -109,6 +112,7 @@ const evaluateAmounts = (amountEvaluation, transactionAmount) => {
         result.code = '101';
         result.message = 'DAY NOT PERMITTED';
         result.rejected = true;
+        result.rule = '';
         return result;
       }
     default:
