@@ -11,3 +11,12 @@ npm install
 ```bash
 npm 
 ```
+
+
+## INFO
+
+- Este microservicio se encarga de todos los módulos que son referentes a la preautorización se hacen cosas como:
+    - Crear reglas
+    - Leer las reglas
+    - Cambiar su estado
+    - Evaluar una transacción en base a su información
