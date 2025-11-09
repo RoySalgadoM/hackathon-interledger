@@ -17,6 +17,7 @@
     "@hapi/inert": "^7.1.0",
     "@hapi/vision": "^7.0.3",
     "async": "^3.2.6",
+    "dotenv": "^17.2.3",
     "hapi-auth-jwt2": "^10.7.0",
     "hapi-i18n": "^3.0.1",
     "hapi-swagger": "^17.3.0",
