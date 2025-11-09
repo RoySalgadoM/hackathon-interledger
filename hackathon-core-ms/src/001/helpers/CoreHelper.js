@@ -9,6 +9,14 @@ const evalComparator = (fieldValue, expectedValue) => {
       } else {
         return value == expectedValue;
       }
+    case 'gt':
+      return expectedValue > value;
+    case 'lt':
+      return expectedValue < value;
+    case 'lte':
+      return expectedValue <= value;
+    case 'gte':
+      return expectedValue >= value;
     default:
       break;
   }
@@ -34,7 +42,7 @@ const evaluateDays = (daysRequirement) => {
         return result;
       } else {
         result.code = '101';
-        result.message = 'DAY NOT PERMITED';
+        result.message = 'DAY NOT PERMITTED';
         result.rejected = true;
         return result;
       }
@@ -43,7 +51,7 @@ const evaluateDays = (daysRequirement) => {
         return result;
       } else {
         result.code = '101';
-        result.message = 'DAY NOT PERMITED';
+        result.message = 'DAY NOT PERMITTED';
         result.rejected = true;
         return result;
       }
@@ -71,6 +79,44 @@ const evaluateWhitelist = (whitelistEvaluation, wallet_merchant) => {
   return true;
 };
 
+const evaluateAmounts = (amountEvaluation, transactionAmount) => {
+  let requirementType = Object.keys(amountEvaluation)[0];
+  let comparatorEvaluation = evalComparator(
+    amountEvaluation[requirementType],
+    parseFloat(transactionAmount)
+  );
+
+  let result = {
+    rejected: false,
+    rule: undefined,
+    message: '',
+    code: '000'
+  };
+  switch (requirementType) {
+    case 'must':
+      if (!comparatorEvaluation) {
+        return result;
+      } else {
+        result.code = '102';
+        result.message = 'AMOUNT NOT PERMITTED';
+        result.rejected = true;
+        return result;
+      }
+    case 'must_not':
+      if (comparatorEvaluation) {
+        return result;
+      } else {
+        result.code = '101';
+        result.message = 'DAY NOT PERMITTED';
+        result.rejected = true;
+        return result;
+      }
+    default:
+      break;
+  }
+  return true;
+};
+
 function getDayOfWeek() {
   const today = new Date();
   const jsDay = today.getDay(); // 0 = domingo, 1 = lunes, ...
@@ -79,4 +125,4 @@ function getDayOfWeek() {
   return normalizedDay;
 }
 
-module.exports = { evaluateDays, evaluateWhitelist };
+module.exports = { evaluateDays, evaluateWhitelist, evaluateAmounts };

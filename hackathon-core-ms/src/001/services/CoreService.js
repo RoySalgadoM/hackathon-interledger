@@ -43,7 +43,7 @@ module.exports = {
         );
         for (let rule of internalMessage.rules) {
           let ruleData = rule.rule;
-          if (ruleData.whitelist) {
+          if (ruleData.whitelist && !internalMessage.result.rejected) {
             let whitelistEvaluation = coreHelper.evaluateWhitelist(
               ruleData.whitelist,
               internalMessage.wallet_merchant
@@ -68,15 +68,21 @@ module.exports = {
 
             if (ruleData.days) {
               internalMessage.result = coreHelper.evaluateDays(ruleData.days);
+              if (internalMessage.result.rejected === true) {
+                break;
+              }
             }
 
             // AMOUNTS
-            // if (ruleData.amount_max || ruleData.amount_min) {
-            //   internalMessage = coreRules.amounts(internalMessage, ruleData);
-            //   if (internalMessage.result.rejected === true) {
-            //     break;
-            //   }
-            // }
+            if (ruleData.amount) {
+              internalMessage.result = coreHelper.evaluateAmounts(
+                ruleData.amount,
+                internalMessage.amountFormatted
+              );
+              if (internalMessage.result.rejected === true) {
+                break;
+              }
+            }
             // TIME
             // if (ruleData.time) {
             //   internalMessage = coreRules.time(internalMessage, ruleData);
@@ -86,7 +92,11 @@ module.exports = {
             // }
             // DAYS
           } else {
-            logManager.printInfo('La regla tiene un estado desactivado');
+            if (internalMessage.result.rejected) {
+              logManager.printInfo('Una regla anterior ya la rechazo');
+            } else {
+              logManager.printInfo('Regla apagada');
+            }
           }
         }
       } else {
