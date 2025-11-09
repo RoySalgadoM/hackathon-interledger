@@ -3,13 +3,13 @@
 Un sistema de pagos seguro basado en códigos QR con reglas inteligentes de preautorización diseñado para turistas internacionales que asistan a la Copa Mundial de la FIFA 2026 en México.
 
 ## CUENTAS PARA OCUPAR LA APLICACIÓN
+
 Para que la aplicación tenga un buen funcionamiento se tendra que iniciar sesión en wallets dev y en nuestra app con la misma cuenta
 
 - **COMERCIO**
 
 - usuario: diego.guido@exos.mx
-- contraseña: Uncleturing123_
-
+- contraseña: Uncleturing123\_
 
 - **COMPRADOR**
 
@@ -20,11 +20,10 @@ El COMERCIO debe entrar y generar un carrito de compra agregando productos a su 
 
 De igual forma el COMERCIO o COMPRADOR podrán generar reglas para que cada una de sus transacciones se evalue y se rechace por parametros especificos (monto, días)
 
-
 ## Enlaces
 
-- **Presentación:** _Enlace a la presentación (por agregar)_
-- **Demo:** _Enlace a demo en vivo (por agregar)_
+- DRIVE: https://drive.google.com/drive/folders/1_EazxapVfPMB_9BCivi9oitvlemj98Dn?usp=sharing
+
 - **Repositorio:** https://github.com/mauricio/hackathon-interledger
 
 ## Cómo funciona
@@ -42,13 +41,18 @@ La funcionalidad de lista blanca complementa este sistema de seguridad permitien
 - Node.js v22.20.0 o superior
 - npm (viene con Node.js)
 
-### Aplicación Frontend
+### Aplicación WWWalock
 
-1. Navegar al directorio del frontend:
+1. Navegar al directorio de cada carpeta (proyecto)
 
 ```bash
 cd hackathon-interledger-front
+cd hackathon-core-ms
+cd hackathon-main-ms
+cd hackathon-gateway-api
 ```
+
+Y en cada proyecto ejecutar los siguientes comandos:
 
 2. Instalar dependencias:
 
@@ -64,14 +68,11 @@ npm run dev
 
 4. La aplicación estará disponible en `http://localhost:5173` (o el puerto mostrado en tu terminal)
 
-5. **Para simular un pago desde un cliente:** Conéctate a la aplicación usando tu dirección IP local (ej: `http://192.168.1.x:5173`) desde otro dispositivo en la misma red. Esto te permite probar el flujo de pagos con código QR desde un dispositivo móvil u otra computadora.
+Para mas entendimiento del como usar la aplicacion ver demo [aqui](https://drive.google.com/file/d/1ywTItuVlX0f456P1ULWVV2zCeKbCXwkp/view?usp=sharing), el cual es un video que muestra el funcionamientos de la aplicacion en ambas vias (comercios y clientes), donde el comercio ofrece una serie de productos (Seccion "Productos" del sidebar) y/o servicios (Parte superior del video demo), y la parte cliente que tiene la opcion de pagar con QR (Seccion "Pagar" del sidebar) el monto generado en una canasta de productos y/o servicios (Parte inferior del video demo).
 
-### Comandos Adicionales
+### Explicación DEMO
 
-- **Construir para producción:** `npm run build`
-- **Vista previa del build de producción:** `npm run preview`
-- **Verificar código:** `npm run lint`
-- **Formatear código:** `npm run format`
+Es una demostracion de un cliente tratando de realizar una compra que incumple una regla configurada previamente (Montos mayores a 500 son rechazados), despues desactiva sus reglas y realiza de nuevo una compra la cual se realiza de forma exitosa.
 
 ## Licencia de Código Abierto y Dependencias
 
@@ -96,16 +97,16 @@ Este proyecto está licenciado bajo la **Licencia Apache 2.0** en cumplimiento c
 - **@hapi/hoek** (^11.0.4) – Licencia BSD
 - **@hapi/inert** (^7.1.0) – Licencia BSD
 - **@hapi/vision** (^7.0.3) – Licencia BSD
-- **async (^3.2.6)** – Licencia MIT 
+- **async (^3.2.6)** – Licencia MIT
 - **hapi-auth-jwt2** (^10.7.0) – Licencia ISC.
-- **hapi-i18n** (^3.0.1) – Licencia MIT 
-- **hapi-swagger** (^17.3.0) – Licencia MIT. 
+- **hapi-i18n** (^3.0.1) – Licencia MIT
+- **hapi-swagger** (^17.3.0) – Licencia MIT.
 - **joi** (^17.13.3) – Licencia BSD-3-Clause.
-- **joi-objectid** (^4.0.2) – Licencia MIT. 
+- **joi-objectid** (^4.0.2) – Licencia MIT.
 - **jsonwebtoken** (^9.0.2) – Licencia MIT.
 - **moment** (^2.30.1) – Licencia MIT.
 - **mongoose** (^8.19.3) – Licencia MIT.
-- **pm2** (^5.4.3) – Licencia AGPL-3.0. 
+- **pm2** (^5.4.3) – Licencia AGPL-3.0.
 - **uuid** (^9.0.1) – Licencia MIT.
 - **winston** (^3.14.2) – Licencia MIT.
 
@@ -179,8 +180,6 @@ Este proyecto está licenciado bajo la **Licencia Apache 2.0** en cumplimiento c
 - **uuid** (^13.0.0) - Generador de UUIDs (Licencia MIT)
 - **winston** (^3.18.3) - Logger para Node.js (Licencia MIT)
 
-
-
 ### Dependencias de Desarrollo Front
 
 - **Vite** (^7.1.11) - Herramienta de compilación frontend de próxima generación (Licencia MIT)
@@ -195,10 +194,10 @@ Este proyecto está licenciado bajo la **Licencia Apache 2.0** en cumplimiento c
 
 ### Dependencias de Desarrollo Core
 
-- **eslint** (^8.57.0) — Licencia MIT. Archivo 
-- **eslint-config-prettier** (^9.1.0) — Licencia MIT. 
-- **eslint-plugin-prettier** (^5.1.3) — Licencia MIT. 
-- **eslint-plugin-vue** (^8.7.1) — Licencia MIT. 
+- **eslint** (^8.57.0) — Licencia MIT. Archivo
+- **eslint-config-prettier** (^9.1.0) — Licencia MIT.
+- **eslint-plugin-prettier** (^5.1.3) — Licencia MIT.
+- **eslint-plugin-vue** (^8.7.1) — Licencia MIT.
 - **prettier** (^3.2.5) — Licencia MIT.
 
 ### Dependencias de Desarrollo API GATEWAY
@@ -260,8 +259,6 @@ Este proyecto está licenciado bajo la **Licencia Apache 2.0** en cumplimiento c
 - **tsconfig-paths** (^4.2.0) - Carga de módulos usando paths de tsconfig.json (Licencia MIT)
 - **typescript** (^5.9.3) - Compilador de TypeScript (Licencia Apache-2.0)
 
-
-
 Todas las dependencias están licenciadas bajo licencias de código abierto permisivas (MIT, Apache 2.0, BSD, ISC) que son compatibles con nuestra licencia Apache 2.0.
 
 ## Miembros del equipo
@@ -282,7 +279,3 @@ Estamos muy orgullosos de haber implementado con éxito un motor de reglas de pr
 ## ¿Qué sigue?
 
 Mirando hacia adelante, planeamos integrar características adicionales como soporte multiidioma (español, inglés, francés, alemán y portugués) para acomodar poblaciones turísticas diversas. Nos gustaría implementar notificaciones push para confirmaciones de transacciones y violaciones de reglas, agregar capacidades de pago sin conexión para áreas con conectividad limitada y expandir el panel de comerciantes para proporcionar análisis detallados e historial de pagos. La integración con billeteras digitales populares y el soporte para criptomonedas adicionales ampliaría el alcance de la plataforma. También visualizamos asociaciones con servicios de transporte, hoteles y atracciones turísticas para crear un ecosistema de pagos integral para la Copa Mundial 2026 y más allá.
-
-
-Para unn video demo y más:
-DRIVE: https://drive.google.com/drive/folders/1_EazxapVfPMB_9BCivi9oitvlemj98Dn?usp=sharing
