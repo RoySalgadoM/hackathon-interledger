@@ -27,8 +27,8 @@ module.exports = {
     'amount',
     'range_amount',
     'days',
-    'hour',
     'range_hour',
+    'accumulates',
     'tx_accumulates',
     'whitelist'
   ],

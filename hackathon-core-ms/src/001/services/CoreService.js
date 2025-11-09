@@ -13,7 +13,7 @@ module.exports = {
   evaluate: async function (req, uuid) {
     let logManager = req.logManager;
     let function_name = 'evaluate';
-    let wallet = req.payload.wallet;
+    let wallet = req.payload.wallet_client;
     let internalMessage = req.payload;
 
     internalMessage.result = {
@@ -43,6 +43,23 @@ module.exports = {
         );
         for (let rule of internalMessage.rules) {
           let ruleData = rule.rule;
+          if (ruleData.whitelist) {
+            let whitelistEvaluation = coreHelper.evaluateWhitelist(
+              ruleData.whitelist,
+              internalMessage.wallet_merchant
+            );
+
+            logManager.printInfo('WALLET WHITELISTED: ' + whitelistEvaluation);
+
+            if (whitelistEvaluation) {
+              return {
+                code: constants.RESPONSE_CODE_SUCCESS,
+                message: 'Success',
+                data: internalMessage.result,
+                idRequest: this.uuid
+              };
+            }
+          }
           if (rule.state) {
             logManager.printInfo('[!] EVALUATING RULE: ' + rule._id.$oid);
             logManager.printInfo(

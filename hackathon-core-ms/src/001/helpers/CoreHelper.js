@@ -15,10 +15,6 @@ const evalComparator = (fieldValue, expectedValue) => {
   return true;
 };
 
-const evalRequirementType = (requirement) => {
-  let requirementType = getRequirementType(requirement);
-};
-
 const evaluateDays = (daysRequirement) => {
   let requirementType = Object.keys(daysRequirement)[0];
   let comparatorEvaluation = evalComparator(
@@ -57,6 +53,24 @@ const evaluateDays = (daysRequirement) => {
   return true;
 };
 
+const evaluateWhitelist = (whitelistEvaluation, wallet_merchant) => {
+  let requirementType = Object.keys(whitelistEvaluation)[0];
+  let whitelisted = evalComparator(
+    whitelistEvaluation[requirementType],
+    wallet_merchant
+  );
+
+  switch (requirementType) {
+    case 'should':
+      return whitelisted;
+    case 'should_not':
+      return !whitelisted;
+    default:
+      break;
+  }
+  return true;
+};
+
 function getDayOfWeek() {
   const today = new Date();
   const jsDay = today.getDay(); // 0 = domingo, 1 = lunes, ...
@@ -65,4 +79,4 @@ function getDayOfWeek() {
   return normalizedDay;
 }
 
-module.exports = { evaluateDays };
+module.exports = { evaluateDays, evaluateWhitelist };

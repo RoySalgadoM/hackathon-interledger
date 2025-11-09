@@ -21,7 +21,8 @@ module.exports = [
       validate: {
         payload: Joi.object({
           uuid: Joi.string(),
-          pan: Joi.string(),
+          wallet_client: Joi.string(),
+          wallet_merchant: Joi.string(),
           type: Joi.string(),
           amount: Joi.string(),
           amountFormatted: Joi.string(),
