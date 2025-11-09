@@ -30,8 +30,7 @@ export class PaymentsService {
 
   async createPayment(
     createPaymentDto: CreatePaymentDto,
-    request: AuthenticatedFastifyRequest,
-    response: FastifyReply
+    request: AuthenticatedFastifyRequest
   ) {
     try {
       let requestTimestamp = new Date().toISOString();
@@ -128,12 +127,10 @@ export class PaymentsService {
           payment_status: 'rejected_by_preauth'
         });
 
-        const conflictResponse = this.responseService.generateResponseConflict(
+        return this.responseService.generateResponseConflict(
           request,
           'Preauth validation failed'
         );
-        this.responseService.sendResponse(response, conflictResponse);
-        return;
       }
 
       this.loggerService.printInfo(

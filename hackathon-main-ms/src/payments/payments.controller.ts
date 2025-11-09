@@ -48,14 +48,9 @@ export class PaymentsController {
   })
   async createPayment(
     @Query() createPaymentDto: CreatePaymentDto,
-    @Req() request: AuthenticatedFastifyRequest,
-    @Res() response: FastifyReply
+    @Req() request: AuthenticatedFastifyRequest
   ) {
-    return await this.paymentsService.createPayment(
-      createPaymentDto,
-      request,
-      response
-    );
+    return await this.paymentsService.createPayment(createPaymentDto, request);
   }
 
   @Get('payment-verification')
