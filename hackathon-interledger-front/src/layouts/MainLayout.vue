@@ -28,6 +28,18 @@
         <h2 class="text-lg font-semibold mb-4">Menú</h2>
         <nav class="space-y-2">
           <button
+            @click="navigateTo('payment')"
+            class="block w-full text-left p-2 rounded hover:bg-gray-200 transition-colors"
+          >
+            Pagar
+          </button>
+          <button
+            @click="navigateTo('products')"
+            class="block w-full text-left p-2 rounded hover:bg-gray-200 transition-colors"
+          >
+            Productos
+          </button>
+          <button
             @click="navigateTo('rulesQuery')"
             class="block w-full text-left p-2 rounded hover:bg-gray-200 transition-colors"
           >
@@ -59,7 +71,7 @@
 
     <!-- Aside/Sidebar Right - Cart -->
     <aside
-      v-if="products.length > 0"
+      v-if="products.length > 0 && $route.name === 'products'"
       class="bg-white border-l border-gray-300 transition-transform duration-300 ease-in-out md:translate-x-0 md:relative overflow-y-auto shadow-[-2px_0_8px_rgba(0,0,0,0.1)]"
       :class="[
         products.length > 0 ? 'translate-x-0' : 'translate-x-full',
@@ -77,6 +89,7 @@
           </div>
           <button
             class="w-full mt-4 px-2 py-1 border border-border-default rounded-lg bg-white text-secondary hover:bg-primary-4 transition-colors text-xs"
+            @click="router.push({ name: 'cart' })"
           >
             Ir al carrito
           </button>

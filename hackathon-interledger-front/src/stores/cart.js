@@ -13,6 +13,7 @@ export const useCartStore = defineStore('cart', () => {
       products.value.push({
         id: productData.id,
         title: productData.title,
+        desc: productData.desc,
         image: productData.image,
         quantity: 1,
         price: parseFloat(productData.price),

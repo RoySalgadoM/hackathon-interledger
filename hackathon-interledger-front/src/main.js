@@ -10,6 +10,7 @@ import ContentLayout from './layouts/ContentLayout.vue'
 import MainLayout from './layouts/MainLayout.vue'
 import QrCode from './components/qr/QRCode.vue'
 import Params from './components/params/Params.vue'
+import Modal from './components/modal/Modal.vue'
 
 import App from './App.vue'
 import router from './router'
@@ -27,4 +28,5 @@ app.component('EContentLayout', ContentLayout)
 app.component('EMainLayout', MainLayout)
 app.component('EQrCode', QrCode)
 app.component('EParams', Params)
+app.component('EModal', Modal)
 app.mount('#app')
