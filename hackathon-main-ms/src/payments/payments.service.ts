@@ -177,6 +177,7 @@ export class PaymentsService {
           access_token: outgoingPaymentGrant.continue.access_token.value,
           finish: ''
         },
+        payment_status: 'pending',
         client_obj: {
           id: sendingWalletAddress.id,
           resource_server: sendingWalletAddress.resourceServer
@@ -267,6 +268,11 @@ export class PaymentsService {
           metadata: { description: 'Your purchase at Shoe Shop' }
         }
       );
+
+      await this.paymentsDatabaseService.updatePayment(payment.request_id, {
+        payment_status: 'completed',
+        response_timestamp: new Date()
+      });
 
       let uiSuccessUrl =
         this.configService.get<string>('uiSuccessUrl') +

@@ -34,4 +34,28 @@ export class PaymentsDatabaseService {
   async getPayment(request_id: string): Promise<PaymentDocument | null> {
     return await this.paymentModel.findOne({ request_id: request_id }).exec();
   }
+
+  async updatePayment(
+    request_id: string,
+    payment: Partial<Payment>
+  ): Promise<void> {
+    this.loggerService.printDebug(
+      `Updating payment in database: ${JSON.stringify(payment, null, 2)}`
+    );
+
+    try {
+      await this.paymentModel
+        .updateOne({ request_id: request_id }, { $set: payment })
+        .exec();
+      this.loggerService.printInfo(
+        `Payment updated successfully with ID: ${request_id}`
+      );
+    } catch (error) {
+      this.loggerService.printError(
+        'Error in updatePayment database method',
+        error instanceof Error ? error.stack : String(error)
+      );
+      throw error;
+    }
+  }
 }

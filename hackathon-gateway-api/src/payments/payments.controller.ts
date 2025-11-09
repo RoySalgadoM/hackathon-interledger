@@ -12,6 +12,7 @@ import { PaymentsService } from './payments.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { Public } from '../common/decorators/public.decorator';
 import { LoggingInterceptor } from '@/common/interceptors/logging.interceptor';
+import { ApiAuthWithPermissionsEndpoint } from '../common/decorators/api.decorators';
 
 @Controller('payments')
 @UseGuards(JwtAuthGuard)
@@ -20,6 +21,7 @@ export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @Get('/payment-request')
+  @ApiAuthWithPermissionsEndpoint('payments.payment-request')
   async paymentRequest(
     @Req() request: FastifyRequest,
     @Res() reply: FastifyReply
@@ -27,7 +29,17 @@ export class PaymentsController {
     return this.paymentsService.paymentRequest(request, reply);
   }
 
+  @Get('/payment-verification')
+  @ApiAuthWithPermissionsEndpoint('payments.payment-verification')
+  async paymentVerification(
+    @Req() request: FastifyRequest,
+    @Res() reply: FastifyReply
+  ): Promise<void> {
+    return this.paymentsService.paymentVerification(request, reply);
+  }
+
   @Get('/callback')
+  @Public()
   async paymentCallback(
     @Req() request: FastifyRequest,
     @Res() reply: FastifyReply

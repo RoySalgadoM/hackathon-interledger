@@ -33,6 +33,23 @@ export class PaymentsService extends BaseService {
       'paymentRequest'
     );
   }
+  async paymentVerification(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ): Promise<void> {
+    const targetUrl = this.buildMicroserviceUrl(
+      this.configService.get('microservices.administrationMsUrl'),
+      '/payments/payment-verification'
+    );
+
+    return this.handleProxyRequest(
+      request,
+      reply,
+      targetUrl,
+      'PaymentsService',
+      'paymentVerification'
+    );
+  }
 
   async paymentCallback(
     request: FastifyRequest,

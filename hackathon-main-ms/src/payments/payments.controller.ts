@@ -55,6 +55,7 @@ export class PaymentsController {
 
   @Get('callback')
   @ApiOperation({ summary: 'Create a new payment' })
+  @Public()
   @LogActivity({
     description: {
       es: 'Crear un nuevo pago',

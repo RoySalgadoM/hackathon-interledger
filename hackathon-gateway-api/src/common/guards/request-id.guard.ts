@@ -12,21 +12,8 @@ export class RequestIdGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-      context.getHandler(),
-      context.getClass()
-    ]);
-
-    if (isPublic) {
-      return true;
-    }
-
-    const request = context.switchToHttp().getRequest();
-
-    if (!request.headers['x-request-id']) {
-      throw new BadRequestException('Header x-request-id is required');
-    }
-
+    // x-request-id ya no es obligatorio
+    // Se permite el acceso sin validar el header
     return true;
   }
 }

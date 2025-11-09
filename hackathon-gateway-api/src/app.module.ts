@@ -12,6 +12,7 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { RequestIdGuard } from './common/guards/request-id.guard';
 import configuration from './config/configuration';
 import { PaymentsModule } from './payments/payments.module';
+import { AuthModule } from './common/auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { PaymentsModule } from './payments/payments.module';
     LoggerModule,
     ProxyModule,
     ResponseModule,
+    AuthModule,
     AdministrationModule,
     WelcomeModule,
     PaymentsModule

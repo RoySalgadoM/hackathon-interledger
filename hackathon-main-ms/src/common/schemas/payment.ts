@@ -68,6 +68,9 @@ export class Payment {
   @Prop({ type: String, default: '' })
   quote_id: string;
 
+  @Prop({ type: String, default: '' })
+  payment_status: string;
+
   @Prop({ default: Date.now })
   created_at: Date;
 

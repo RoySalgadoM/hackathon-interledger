@@ -28,14 +28,14 @@ export class AuthService {
         loginDto.email
       );
 
-      if (user.length === 0) {
+      if (!user) {
         return this.responseService.generateResponseNotFound(
           request,
           'User not found'
         );
       }
 
-      const userData = user[0] as UserDocument;
+      const userData = user as UserDocument;
       const jti = crypto.randomBytes(16).toString('hex');
       const jwtAud = this.configService.get<string>('jwt.audience');
       const jwtIss = this.configService.get<string>('jwt.issuer');
@@ -57,11 +57,6 @@ export class AuthService {
         algorithm: this.configService.get<Algorithm>('jwt.algorithm'),
         expiresIn: maxTokenAge
       });
-
-      await this.authDatabaseService.updateUserLastAccessDate(
-        userData._id!.toString(),
-        new Date()
-      );
 
       let successResponse = {
         token: customToken,
