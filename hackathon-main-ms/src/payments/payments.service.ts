@@ -424,8 +424,9 @@ export class PaymentsService {
       let uiSuccessUrl =
         this.configService.get<string>('uiSuccessUrl') +
         '?request_id=' +
-        payment.request_id;
-      '&result=' + 'success';
+        payment.request_id +
+        '&result=' +
+        'success';
 
       response.status(302);
       response.header('Location', uiSuccessUrl);
