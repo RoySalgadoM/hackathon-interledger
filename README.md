@@ -12,9 +12,9 @@ Un sistema de pagos seguro basado en códigos QR con reglas inteligentes de prea
 
 Con millones de turistas esperados para el Mundial 2026 en México, nuestra solución facilita pagos seguros y sin fricciones mediante códigos QR y tecnología Interledger. Los turistas simplemente escanean el QR del comerciante para autorizar pagos instantáneos que se procesan en tiempo real, eliminando las complicaciones de cambio de divisas, altas comisiones bancarias y limitaciones de tarjetas internacionales.
 
-El corazón de la plataforma es un sistema inteligente de preautorización que protege el patrimonio del usuario mediante reglas personalizables. Los turistas pueden configurar límites de gasto, restricciones por categoría de comercio, montos máximos por transacción y horarios permitidos. Esto es especialmente útil durante su estancia en México, donde los gastos son menos predecibles y existe mayor riesgo de cargos no deseados.
+El corazón de la plataforma es un sistema inteligente de preautorización que protege el patrimonio del usuario mediante reglas personalizables. Los usuarios pueden configurar límites de gasto, restricciones por categoría de comercio, montos máximos por transacción y horarios permitidos.
 
-La funcionalidad de lista blanca complementa este sistema de seguridad permitiendo que el turista agregue comercios de confianza de su país de origen que queden exentos de estas reglas restrictivas. De esta manera, mientras viaja, sus pagos cotidianos en casa continúan funcionando sin interrupciones: suscripciones de streaming, pagos recurrentes, tiendas habituales y servicios esenciales no se ven afectados por las medidas de seguridad implementadas específicamente para protegerlo durante el viaje.
+La funcionalidad de lista blanca complementa este sistema de seguridad permitiendo que el usuario agregue comercios de confianza de su país de origen que queden exentos de estas reglas restrictivas. De esta manera, mientras viaja, sus pagos cotidianos en casa continúan funcionando sin interrupciones: suscripciones de streaming, pagos recurrentes, tiendas habituales y servicios esenciales no se ven afectados por las medidas de seguridad implementadas específicamente para protegerlo durante el viaje.
 
 ## Cómo ejecutar
 
@@ -58,7 +58,7 @@ npm run dev
 
 Este proyecto está licenciado bajo la **Licencia Apache 2.0** en cumplimiento con los requisitos del Hackathon de Interledger. Representamos y garantizamos que esta entrada es nuestro trabajo original y no infringe los derechos de propiedad intelectual de terceros.
 
-### Dependencias de Producción
+### Dependencias de Producción Front
 
 - **Vue 3** (^3.5.22) - Framework progresivo de JavaScript (Licencia MIT)
 - **Vue Router** (^4.6.3) - Enrutador oficial para Vue.js (Licencia MIT)
@@ -69,7 +69,28 @@ Este proyecto está licenciado bajo la **Licencia Apache 2.0** en cumplimiento c
 - **qrcode** (^1.5.4) - Generador de códigos QR (Licencia MIT)
 - **jsQR** (^1.4.0) - Lector de códigos QR (Licencia Apache 2.0)
 
-### Dependencias de Desarrollo
+### Dependencias de Producción Core
+
+- **@hapi/basic** (^7.0.2) – Licencia BSD
+- **@hapi/cookie** (^12.0.1) – Licencia BSD
+- **@hapi/hapi** (^21.3.10) – Licencia BSD
+- **@hapi/hoek** (^11.0.4) – Licencia BSD
+- **@hapi/inert** (^7.1.0) – Licencia BSD
+- **@hapi/vision** (^7.0.3) – Licencia BSD
+- **async (^3.2.6)** – Licencia MIT 
+- **hapi-auth-jwt2** (^10.7.0) – Licencia ISC.
+- **hapi-i18n** (^3.0.1) – Licencia MIT 
+- **hapi-swagger** (^17.3.0) – Licencia MIT. 
+- **joi** (^17.13.3) – Licencia BSD-3-Clause.
+- **joi-objectid** (^4.0.2) – Licencia MIT. 
+- **jsonwebtoken** (^9.0.2) – Licencia MIT.
+- **moment** (^2.30.1) – Licencia MIT.
+- **mongoose** (^8.19.3) – Licencia MIT.
+- **pm2** (^5.4.3) – Licencia AGPL-3.0. 
+- **uuid** (^9.0.1) – Licencia MIT.
+- **winston** (^3.14.2) – Licencia MIT.
+
+### Dependencias de Desarrollo Front
 
 - **Vite** (^7.1.11) - Herramienta de compilación frontend de próxima generación (Licencia MIT)
 - **@vitejs/plugin-vue** (^6.0.1) - Plugin oficial de Vue para Vite (Licencia MIT)
@@ -80,6 +101,14 @@ Este proyecto está licenciado bajo la **Licencia Apache 2.0** en cumplimiento c
 - **@vue/eslint-config-prettier** (^10.2.0) - Configuración de ESLint para Prettier (Licencia MIT)
 - **vite-plugin-vue-devtools** (^8.0.3) - Plugin de Vite para Vue DevTools (Licencia MIT)
 - **globals** (^16.4.0) - Identificadores globales de diferentes entornos JavaScript (Licencia MIT)
+
+### Dependencias de Desarrollo Core
+
+- **eslint** (^8.57.0) — Licencia MIT. Archivo 
+- **eslint-config-prettier** (^9.1.0) — Licencia MIT. 
+- **eslint-plugin-prettier** (^5.1.3) — Licencia MIT. 
+- **eslint-plugin-vue** (^8.7.1) — Licencia MIT. 
+- **prettier** (^3.2.5) — Licencia MIT.
 
 Todas las dependencias están licenciadas bajo licencias de código abierto permisivas (MIT, Apache 2.0, BSD, ISC) que son compatibles con nuestra licencia Apache 2.0.
 
