@@ -12,6 +12,7 @@ import { MiddlewareModule } from './common/middleware/middleware.module';
 import configuration from './config/configuration';
 import { ExcelService } from './common/services/excel.service';
 import { AuthModule } from './auth/auth.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { AuthModule } from './auth/auth.module';
     ActivityModule,
     MiddlewareModule,
     WelcomeModule,
-    AuthModule
+    AuthModule,
+    PaymentsModule
   ],
   providers: [
     ExcelService,

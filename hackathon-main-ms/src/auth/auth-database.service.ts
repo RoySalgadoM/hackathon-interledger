@@ -2,16 +2,10 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { User, UserDocument } from '../common/schemas/user.schema';
-import { Profile, ProfileDocument } from '../common/schemas/profile.schema';
-import { ApiKey, ApiKeyDocument } from '../common/schemas/api-key.schema';
 
 @Injectable()
 export class AuthDatabaseService {
-  constructor(
-    @InjectModel(User.name) private userModel: Model<UserDocument>,
-    @InjectModel(Profile.name) private profileModel: Model<ProfileDocument>,
-    @InjectModel(ApiKey.name) private apiKeyModel: Model<ApiKeyDocument>
-  ) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async getUserByEmail(email: string): Promise<UserDocument[]> {
     const key = String(email).trim().toLowerCase();
@@ -44,18 +38,6 @@ export class AuthDatabaseService {
         }
       }
     ]);
-  }
-
-  async getProfileById(profileId: string): Promise<ProfileDocument> {
-    return (await this.profileModel.findById(profileId)) as ProfileDocument;
-  }
-
-  async getApiKeyById(apiKeyId: string): Promise<ApiKeyDocument> {
-    const apiKey = await this.apiKeyModel
-      .aggregate([{ $match: { api_key: apiKeyId, delete: false } }])
-      .then(([doc]: any[]) => doc);
-
-    return apiKey;
   }
 
   async updateUserLastAccessDate(

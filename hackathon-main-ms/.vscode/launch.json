@@ -20,7 +20,8 @@
         "AUDIENCE": "api://default",
         "LOG_LEVEL": "debug",
         "LOG_FORMAT": "raw",
-        "PORT": "3001"
+        "PORT": "3001",
+        "CALLBACK_URL": "http://localhost:3000/payments/callback"
       },
       "console": "integratedTerminal",
       "restart": true,

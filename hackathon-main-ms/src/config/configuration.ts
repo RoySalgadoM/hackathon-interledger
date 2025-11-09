@@ -7,8 +7,7 @@
 
   // Database
   mongodb: {
-    uri:
-      process.env.MONGODB_URI
+    uri: process.env.MONGODB_URI
   },
 
   // JWT Configuration
@@ -21,7 +20,10 @@
     audience: process.env.JWT_AUD,
     issuer: process.env.JWT_ISS
   },
-  
+
+  // Callback URL
+  callbackUrl: process.env.CALLBACK_URL,
+
   // API Configuration
   api: {
     context: process.env.CONTEXT_API || '/api',

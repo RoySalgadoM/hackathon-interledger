@@ -11,6 +11,7 @@ import { ThrottlerGuard } from '@nestjs/throttler';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { RequestIdGuard } from './common/guards/request-id.guard';
 import configuration from './config/configuration';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import configuration from './config/configuration';
     ProxyModule,
     ResponseModule,
     AdministrationModule,
-    WelcomeModule
+    WelcomeModule,
+    PaymentsModule
   ],
   providers: [
     {
