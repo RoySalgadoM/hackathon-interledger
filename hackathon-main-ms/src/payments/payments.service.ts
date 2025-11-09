@@ -66,15 +66,35 @@ export class PaymentsService {
         `Found ${clientRules.length} rule(s) for client wallet`
       );
 
+      const rulesPlain = clientRules.map((rule) => {
+        const ruleObj = rule.toObject ? rule.toObject() : rule;
+        if (ruleObj._id) {
+          ruleObj._id = {
+            $oid: ruleObj._id.toString()
+          };
+        }
+        if (ruleObj.creationDate) {
+          ruleObj.creationDate = {
+            $date: new Date(ruleObj.creationDate).toISOString()
+          };
+        }
+        if (ruleObj.lastUpdate) {
+          ruleObj.lastUpdate = {
+            $date: new Date(ruleObj.lastUpdate).toISOString()
+          };
+        }
+        return ruleObj;
+      });
+
       let preauthPayload = {
         uuid: requestId,
         wallet_client: createPaymentDto.client_account,
         wallet_merchant: createPaymentDto.merchant_account,
-        amount: createPaymentDto.amount,
-        amountFormatted: createPaymentDto.amount,
+        amount: String(createPaymentDto.amount),
+        amountFormatted: String(createPaymentDto.amount),
         date: requestTimestampDateFormatted,
         time: requestTimestampTimeFormatted,
-        rules: clientRules,
+        rules: rulesPlain,
         accumulated: {},
         transactions: {},
         result: {},
@@ -90,9 +110,16 @@ export class PaymentsService {
         )}`
       );
 
-      const preauthResponse = await axios.post(preauthUrl, preauthPayload);
+      const authorizationHeader =
+        request.headers['authorization'] || request.headers['Authorization'];
 
-      if (!preauthResponse.data || preauthResponse.data.status !== true) {
+      const preauthResponse = await axios.post(preauthUrl, preauthPayload, {
+        headers: {
+          Authorization: authorizationHeader ? String(authorizationHeader) : ''
+        }
+      });
+
+      if (!preauthResponse.data || preauthResponse.data.data.rejected) {
         this.loggerService.printInfo(
           `Preauth validation failed for request_id: ${requestId}`
         );
@@ -101,10 +128,12 @@ export class PaymentsService {
           payment_status: 'rejected_by_preauth'
         });
 
-        return this.responseService.generateResponseError(
+        const conflictResponse = this.responseService.generateResponseConflict(
           request,
           'Preauth validation failed'
         );
+        this.responseService.sendResponse(response, conflictResponse);
+        return;
       }
 
       this.loggerService.printInfo(

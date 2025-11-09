@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Post,
   Req,
   Res,
   UseGuards,
@@ -20,7 +21,7 @@ import { ApiAuthWithPermissionsEndpoint } from '../common/decorators/api.decorat
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  @Get('/payment-request')
+  @Post('/payment-request')
   @ApiAuthWithPermissionsEndpoint('payments.payment-request')
   async paymentRequest(
     @Req() request: FastifyRequest,

@@ -18,9 +18,9 @@ export default () => ({
 
   // Microservices URLs
   microservices: {
-    administrationMsUrl:
-      process.env.ADMINISTRATION_MS_URL,
+    administrationMsUrl: process.env.ADMINISTRATION_MS_URL,
     visorMsUrl: process.env.PREAUTH_MS_URL,
+    preauthMsUrl: process.env.PREAUTH_MS_URL
   },
 
   // API Configuration

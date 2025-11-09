@@ -1,6 +1,7 @@
 ﻿import {
   Controller,
   Get,
+  Post,
   Query,
   Req,
   Res,
@@ -37,7 +38,7 @@ import { FastifyReply } from 'fastify';
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  @Get('payment-request')
+  @Post('payment-request')
   @ApiOperation({ summary: 'Create a new payment' })
   @LogActivity({
     description: {

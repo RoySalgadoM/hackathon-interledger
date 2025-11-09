@@ -22,7 +22,7 @@
         "LOG_FORMAT": "raw",
         "PORT": "3001",
         "CALLBACK_URL": "http://localhost:3000/api/v1/payments/callback",
-        "PREAUTH_URL": "http://localhost:3000/api/v1/payments/preauth",
+        "PREAUTH_URL": "http://localhost:3000/api/v1/preauth/evaluate",
         "UI_SUCCESS_URL": "http://localhost:4100/portal/payments/success"
       },
       "console": "integratedTerminal",

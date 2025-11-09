@@ -23,7 +23,7 @@ export class PreauthController {
 
   @Post('/rules')
   @ApiAuthWithPermissionsEndpoint('')
-  async login(
+  async createRule(
     @Req() request: FastifyRequest,
     @Res() reply: FastifyReply
   ): Promise<void> {
