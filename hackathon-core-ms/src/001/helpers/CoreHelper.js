@@ -30,7 +30,7 @@ const evaluateDays = (daysRequirement) => {
   };
   switch (requirementType) {
     case 'should':
-      if (comparatorEvaluation) {
+      if (!comparatorEvaluation) {
         return result;
       } else {
         result.code = '101';
@@ -39,7 +39,7 @@ const evaluateDays = (daysRequirement) => {
         return result;
       }
     case 'should_not':
-      if (!comparatorEvaluation) {
+      if (comparatorEvaluation) {
         return result;
       } else {
         result.code = '101';
