@@ -17,6 +17,7 @@ import {
 import fs from 'fs';
 import { ConfigService } from '@nestjs/config';
 import { FastifyReply } from 'fastify';
+import axios from 'axios';
 
 @Injectable()
 export class PaymentsService {
@@ -33,6 +34,83 @@ export class PaymentsService {
     response: FastifyReply
   ) {
     try {
+      let requestTimestamp = new Date().toISOString();
+
+      const date = new Date(requestTimestamp);
+      const year = date.getFullYear().toString().slice(-2);
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      let requestTimestampDateFormatted = year + month + day;
+
+      let requestTimestampTimeFormatted =
+        date.getHours().toString().padStart(2, '0') +
+        date.getMinutes().toString().padStart(2, '0') +
+        date.getSeconds().toString().padStart(2, '0');
+
+      const requestId = String(request.headers['x-request-id'] || '');
+      const preauthUrl = this.configService.get<string>('preauthUrl') || '';
+
+      this.loggerService.printDebug(
+        `Validating preauth for request_id: ${requestId}`
+      );
+
+      this.loggerService.printDebug(
+        `Consulting rules for client wallet: ${createPaymentDto.client_account}`
+      );
+
+      const clientRules = await this.paymentsDatabaseService.getRulesByWallet(
+        createPaymentDto.client_account
+      );
+
+      this.loggerService.printInfo(
+        `Found ${clientRules.length} rule(s) for client wallet`
+      );
+
+      let preauthPayload = {
+        uuid: requestId,
+        wallet_client: createPaymentDto.client_account,
+        wallet_merchant: createPaymentDto.merchant_account,
+        amount: createPaymentDto.amount,
+        amountFormatted: createPaymentDto.amount,
+        date: requestTimestampDateFormatted,
+        time: requestTimestampTimeFormatted,
+        rules: clientRules,
+        accumulated: {},
+        transactions: {},
+        result: {},
+        request_timestamp: requestTimestamp,
+        response_timestamp: requestTimestamp
+      };
+
+      this.loggerService.printDebug(
+        `Sending preauth POST request with payload: ${JSON.stringify(
+          preauthPayload,
+          null,
+          2
+        )}`
+      );
+
+      const preauthResponse = await axios.post(preauthUrl, preauthPayload);
+
+      if (!preauthResponse.data || preauthResponse.data.status !== true) {
+        this.loggerService.printInfo(
+          `Preauth validation failed for request_id: ${requestId}`
+        );
+
+        await this.paymentsDatabaseService.updatePayment(requestId, {
+          payment_status: 'rejected_by_preauth'
+        });
+
+        return this.responseService.generateResponseError(
+          request,
+          'Preauth validation failed'
+        );
+      }
+
+      this.loggerService.printInfo(
+        `Preauth validation successful for request_id: ${requestId}`
+      );
+
       const privateKey = fs.readFileSync('private.key', 'utf-8');
 
       const client = await createAuthenticatedClient({
@@ -153,19 +231,6 @@ export class PaymentsService {
         }
       );
 
-      let requestTimestamp = new Date().toISOString();
-
-      const date = new Date(requestTimestamp);
-      const year = date.getFullYear().toString().slice(-2);
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      let requestTimestampDateFormatted = year + month + day;
-
-      let requestTimestampTimeFormatted =
-        date.getHours().toString().padStart(2, '0') +
-        date.getMinutes().toString().padStart(2, '0') +
-        date.getSeconds().toString().padStart(2, '0');
-
       const paymentData = {
         client_account: createPaymentDto.client_account,
         merchant_account: createPaymentDto.merchant_account,
@@ -278,7 +343,7 @@ export class PaymentsService {
         await this.paymentsDatabaseService.updatePayment(
           createPaymentDto.request_id,
           {
-            payment_status: 'rejected'
+            payment_status: 'rejected_by_client'
           }
         );
 

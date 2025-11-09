@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Payment, PaymentDocument } from '../common/schemas/payment';
 import { Wallet, WalletDocument } from '../common/schemas/wallet.schema';
+import { Rule, RuleDocument } from '../common/schemas/rule.schema';
 import { LoggerService } from '../common/logger/logger.service';
 
 @Injectable()
@@ -10,6 +11,7 @@ export class PaymentsDatabaseService {
   constructor(
     @InjectModel(Payment.name) private paymentModel: Model<PaymentDocument>,
     @InjectModel(Wallet.name) private walletModel: Model<WalletDocument>,
+    @InjectModel(Rule.name) private ruleModel: Model<RuleDocument>,
     private readonly loggerService: LoggerService
   ) {}
 
@@ -84,6 +86,30 @@ export class PaymentsDatabaseService {
     } catch (error) {
       this.loggerService.printError(
         'Error in getWallet database method',
+        error instanceof Error ? error.stack : String(error)
+      );
+      throw error;
+    }
+  }
+
+  async getRulesByWallet(walletAddress: string): Promise<RuleDocument[]> {
+    this.loggerService.printDebug(`Getting rules for wallet: ${walletAddress}`);
+
+    try {
+      const rules = await this.ruleModel
+        .find({
+          wallets: walletAddress,
+          state: true
+        })
+        .exec();
+
+      this.loggerService.printInfo(
+        `Found ${rules.length} rule(s) for wallet: ${walletAddress}`
+      );
+      return rules;
+    } catch (error) {
+      this.loggerService.printError(
+        'Error in getRulesByWallet database method',
         error instanceof Error ? error.stack : String(error)
       );
       throw error;

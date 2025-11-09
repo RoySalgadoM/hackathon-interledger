@@ -4,6 +4,7 @@ import { User, UserSchema } from './user.schema';
 import { Activity, ActivitySchema } from './activity.schema';
 import { Payment, PaymentSchema } from './payment';
 import { Wallet, WalletSchema } from './wallet.schema';
+import { Rule, RuleSchema } from './rule.schema';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { Wallet, WalletSchema } from './wallet.schema';
       { name: User.name, schema: UserSchema },
       { name: Activity.name, schema: ActivitySchema },
       { name: Payment.name, schema: PaymentSchema },
-      { name: Wallet.name, schema: WalletSchema }
+      { name: Wallet.name, schema: WalletSchema },
+      { name: Rule.name, schema: RuleSchema }
     ])
   ],
   exports: [
@@ -19,7 +21,8 @@ import { Wallet, WalletSchema } from './wallet.schema';
       { name: User.name, schema: UserSchema },
       { name: Activity.name, schema: ActivitySchema },
       { name: Payment.name, schema: PaymentSchema },
-      { name: Wallet.name, schema: WalletSchema }
+      { name: Wallet.name, schema: WalletSchema },
+      { name: Rule.name, schema: RuleSchema }
     ])
   ]
 })
