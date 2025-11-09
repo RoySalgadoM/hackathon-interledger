@@ -7,7 +7,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "exos-control-api",
+      "name": "hackathon-core-ms",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/src/001/listener.js",
       "outputCapture": "std",
