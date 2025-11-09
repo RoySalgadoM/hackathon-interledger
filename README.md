@@ -2,6 +2,25 @@
 
 Un sistema de pagos seguro basado en códigos QR con reglas inteligentes de preautorización diseñado para turistas internacionales que asistan a la Copa Mundial de la FIFA 2026 en México.
 
+## CUENTAS PARA OCUPAR LA APLICACIÓN
+Para que la aplicación tenga un buen funcionamiento se tendra que iniciar sesión en wallets dev y en nuestra app con la misma cuenta
+
+- **COMERCIO**
+
+- usuario: diego.guido@exos.mx
+- contraseña: Uncleturing123_
+
+
+- **COMPRADOR**
+
+- usuario: roy21rasm@gmail.com
+- contraseña: Alemania21$21
+
+El COMERCIO debe entrar y generar un carrito de compra agregando productos a su carrito una vez que haya terminado con los productos genera el código QR, el COMPRADOR escanea el codigo QR y sigue el flujo.
+
+De igual forma el COMERCIO o COMPRADOR podrán generar reglas para que cada una de sus transacciones se evalue y se rechace por parametros especificos (monto, días)
+
+
 ## Enlaces
 
 - **Presentación:** _Enlace a la presentación (por agregar)_
@@ -263,3 +282,6 @@ Estamos muy orgullosos de haber implementado con éxito un motor de reglas de pr
 ## ¿Qué sigue?
 
 Mirando hacia adelante, planeamos integrar características adicionales como soporte multiidioma (español, inglés, francés, alemán y portugués) para acomodar poblaciones turísticas diversas. Nos gustaría implementar notificaciones push para confirmaciones de transacciones y violaciones de reglas, agregar capacidades de pago sin conexión para áreas con conectividad limitada y expandir el panel de comerciantes para proporcionar análisis detallados e historial de pagos. La integración con billeteras digitales populares y el soporte para criptomonedas adicionales ampliaría el alcance de la plataforma. También visualizamos asociaciones con servicios de transporte, hoteles y atracciones turísticas para crear un ecosistema de pagos integral para la Copa Mundial 2026 y más allá.
+
+
+DRIVE: https://drive.google.com/drive/folders/1_EazxapVfPMB_9BCivi9oitvlemj98Dn?usp=sharing
