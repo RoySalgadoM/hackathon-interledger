@@ -26,3 +26,29 @@ export class CreatePaymentDto {
   @IsNotEmpty()
   amount: number;
 }
+
+export class PaymentCallbackDto {
+  @ApiProperty({
+    description: 'Merchant Account',
+    example: '1234567890'
+  })
+  @IsString()
+  @IsNotEmpty()
+  interact_ref: string;
+
+  @ApiProperty({
+    description: 'Password',
+    example: '1234567890'
+  })
+  @IsString()
+  @IsNotEmpty()
+  request_id: string;
+
+  @ApiProperty({
+    description: 'Hash',
+    example: '1234567890'
+  })
+  @IsString()
+  @IsNotEmpty()
+  hash: string;
+}

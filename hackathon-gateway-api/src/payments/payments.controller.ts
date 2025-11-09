@@ -20,11 +20,26 @@ export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @Get('/payment-request')
-  @Public()
   async paymentRequest(
     @Req() request: FastifyRequest,
     @Res() reply: FastifyReply
   ): Promise<void> {
     return this.paymentsService.paymentRequest(request, reply);
+  }
+
+  @Get('/callback')
+  async paymentCallback(
+    @Req() request: FastifyRequest,
+    @Res() reply: FastifyReply
+  ): Promise<void> {
+    return this.paymentsService.paymentCallback(request, reply);
+  }
+
+  @Get('/wallets')
+  async getWallets(
+    @Req() request: FastifyRequest,
+    @Res() reply: FastifyReply
+  ): Promise<void> {
+    return this.paymentsService.getWallets(request, reply);
   }
 }

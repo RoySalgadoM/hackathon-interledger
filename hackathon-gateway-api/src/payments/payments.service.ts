@@ -33,4 +33,40 @@ export class PaymentsService extends BaseService {
       'paymentRequest'
     );
   }
+
+  async paymentCallback(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ): Promise<void> {
+    const targetUrl = this.buildMicroserviceUrl(
+      this.configService.get('microservices.administrationMsUrl'),
+      '/payments/callback'
+    );
+
+    return this.handleProxyRequest(
+      request,
+      reply,
+      targetUrl,
+      'PaymentsService',
+      'paymentCallback'
+    );
+  }
+
+  async getWallets(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ): Promise<void> {
+    const targetUrl = this.buildMicroserviceUrl(
+      this.configService.get('microservices.administrationMsUrl'),
+      '/payments/wallets'
+    );
+
+    return this.handleProxyRequest(
+      request,
+      reply,
+      targetUrl,
+      'PaymentsService',
+      'getWallets'
+    );
+  }
 }

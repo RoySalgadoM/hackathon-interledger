@@ -23,6 +23,7 @@
 
   // Callback URL
   callbackUrl: process.env.CALLBACK_URL,
+  uiSuccessUrl: process.env.UI_SUCCESS_URL,
 
   // API Configuration
   api: {
