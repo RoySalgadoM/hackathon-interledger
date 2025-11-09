@@ -90,6 +90,78 @@ Este proyecto está licenciado bajo la **Licencia Apache 2.0** en cumplimiento c
 - **uuid** (^9.0.1) – Licencia MIT.
 - **winston** (^3.14.2) – Licencia MIT.
 
+### Dependencias de Producción API GATEWAY
+
+- **@fastify/compress** (^7.0.1) - Utilidades de compresión para Fastify (Licencia MIT)
+- **@fastify/cookie** (^9.3.1) - Plugin para manejar cookies en Fastify (Licencia MIT)
+- **@fastify/cors** (^11.1.0) - Plugin para CORS en Fastify (Licencia MIT)
+- **@fastify/formbody** (^7.4.0) - Parser para formularios en Fastify (Licencia MIT)
+- **@fastify/helmet** (^13.0.2) - Headers de seguridad para Fastify usando Helmet (Licencia MIT)
+- **@fastify/multipart** (^9.2.1) - Parser para multipart en Fastify (Licencia MIT)
+- **@fastify/rate-limit** (^10.3.0) - Limitación de tasa para Fastify (Licencia MIT)
+- **@fastify/static** (^8.2.0) - Plugin para servir archivos estáticos en Fastafe Fastify (Licencia MIT)
+- **@nest-lab/fastify-multer** (^1.3.0) - Integración de Multer con Fastify en NestJS (Licencia MIT)
+- **@nestjs/axios** (^4.0.1) - Módulo HTTP basado en Axios para NestJS (Licencia MIT)
+- **@nestjs/common** (^11.1.6) - Módulo común de NestJS (Licencia MIT)
+- **@nestjs/config** (^4.0.2) - Módulo de configuración para NestJS (Licencia MIT)
+- **@nestjs/core** (^11.1.6) - Núcleo de NestJS (Licencia MIT)
+- **@nestjs/jwt** (^11.0.0) - Módulo JWT para NestJS (Licencia MIT)
+- **@nestjs/passport** (^11.0.5) - Módulo Passport para NestJS (Licencia MIT)
+- **@nestjs/platform-express** (^11.1.7) - Plataforma Express para NestJS (Licencia MIT)
+- **@nestjs/platform-fastify** (^11.1.6) - Plataforma Fastify para NestJS (Licencia MIT)
+- **@nestjs/swagger** (^11.2.1) - Módulo Swagger para NestJS (Licencia MIT)
+- **@nestjs/throttler** (^6.4.0) - Limitador de tasa para NestJS (Licencia MIT)
+- **axios** (^1.12.2) - Cliente HTTP basado en promesas (Licencia MIT)
+- **class-transformer** (^0.5.1) - Transformación de objetos planos a clases (Licencia MIT)
+- **class-validator** (^0.14.2) - Validación basada en decoradores (Licencia MIT)
+- **fastify** (^5.6.1) - Framework web rápido para Node.js (Licencia MIT)
+- **form-data** (^4.0.4) - Constructor de FormData para Node.js (Licencia MIT)
+- **jsonwebtoken** (^9.0.2) - Implementación de JSON Web Tokens (Licencia MIT)
+- **mongoose** (^8.9.0) - Modelado de objetos para MongoDB (Licencia Apache-2.0)
+- **multer** (^2.0.2) - Middleware para manejo de `multipart/form-data` (Licencia MIT)
+- **passport** (^0.7.0) - Middleware de autenticación para Node.js (Licencia MIT)
+- **passport-custom** (^1.1.1) - Estrategia personalizada para Passport (Licencia MIT)
+- **passport-jwt** (^4.0.1) - Estrategia JWT para Passport (Licencia MIT)
+- **reflect-metadata** (^0.2.2) - Polyfill para metadata reflection API (Licencia Apache-2.0)
+- **rxjs** (^7.8.2) - Reactive Extensions para JavaScript (Licencia Apache-2.0)
+- **uuid** (^13.0.0) - Generador de UUIDs (Licencia MIT)
+- **winston** (^3.18.3) - Logger versátil para Node.js (Licencia MIT)
+
+### Dependencias de Producción MAIN MS
+
+- **@interledger/open-payments** (^7.1.3) - Herramientas para interactuar con la API de Open Payments (Licencia Apache-2.0)
+- **@fastify/compress** (^7.0.1) - Utilidades de compresión para Fastify (Licencia MIT)
+- **@fastify/cookie** (^9.3.1) - Plugin para manejar cookies en Fastify (Licencia MIT)
+- **@fastify/cors** (^11.1.0) - Plugin para CORS en Fastify (Licencia MIT)
+- **@fastify/formbody** (^7.4.0) - Parser para formularios en Fastify (Licencia MIT)
+- **@fastify/helmet** (^13.0.2) - Headers de seguridad para Fastify usando Helmet (Licencia MIT)
+- **@fastify/multipart** (^8.0.0) - Parser para multipart en Fastify (Licencia MIT)
+- **@fastify/static** (^8.2.0) - Plugin para servir archivos estáticos en Fastify (Licencia MIT)
+- **@nestjs/common** (^11.1.6) - Módulo común de NestJS (Licencia MIT)
+- **@nestjs/config** (^4.0.2) - Módulo de configuración para NestJS (Licencia MIT)
+- **@nestjs/core** (^11.1.6) - Núcleo de NestJS (Licencia MIT)
+- **@nestjs/jwt** (^11.0.0) - Módulo JWT para NestJS (Licencia MIT)
+- **@nestjs/mongoose** (^11.0.3) - Módulo Mongoose para NestJS (Licencia MIT)
+- **@nestjs/passport** (^11.0.5) - Módulo Passport para NestJS (Licencia MIT)
+- **@nestjs/platform-fastify** (^11.1.8) - Plataforma Fastify para NestJS (Licencia MIT)
+- **@nestjs/swagger** (^11.2.1) - Módulo Swagger para NestJS (Licencia MIT)
+- **axios** (^1.12.2) - Cliente HTTP basado en promesas (Licencia MIT)
+- **class-transformer** (^0.5.1) - Transformación de objetos planos a clases (Licencia MIT)
+- **class-validator** (^0.14.2) - Validación basada en decoradores (Licencia MIT)
+- **excel4node** (^1.8.2) - Generador de archivos Excel para Node.js (Licencia MIT)
+- **fastify** (^5.6.1) - Framework web rápido para Node.js (Licencia MIT)
+- **moment** (^2.29.4) - Biblioteca para parsing, validación y formateo de fechas (Licencia MIT)
+- **moment-timezone** (^0.5.45) - Add-on para Moment.js con soporte de zonas horarias (Licencia MIT)
+- **mongoose** (^8.19.3) - Modelado de objetos para MongoDB (Licencia Apache-2.0)
+- **passport** (^0.7.0) - Middleware de autenticación para Node.js (Licencia MIT)
+- **passport-jwt** (^4.0.1) - Estrategia JWT para Passport (Licencia MIT)
+- **reflect-metadata** (^0.2.2) - Polyfill para metadata reflection API (Licencia Apache-2.0)
+- **rxjs** (^7.8.2) - Reactive Extensions para JavaScript (Licencia Apache-2.0)
+- **uuid** (^13.0.0) - Generador de UUIDs (Licencia MIT)
+- **winston** (^3.18.3) - Logger para Node.js (Licencia MIT)
+
+
+
 ### Dependencias de Desarrollo Front
 
 - **Vite** (^7.1.11) - Herramienta de compilación frontend de próxima generación (Licencia MIT)
@@ -109,6 +181,67 @@ Este proyecto está licenciado bajo la **Licencia Apache 2.0** en cumplimiento c
 - **eslint-plugin-prettier** (^5.1.3) — Licencia MIT. 
 - **eslint-plugin-vue** (^8.7.1) — Licencia MIT. 
 - **prettier** (^3.2.5) — Licencia MIT.
+
+### Dependencias de Desarrollo API GATEWAY
+
+- **@eslint/js** (^9.37.0) - Implementación del lenguaje JavaScript para ESLint (Licencia MIT)
+- **@nestjs/cli** (^11.0.10) - CLI para NestJS (Licencia MIT)
+- **@nestjs/schematics** (^11.0.8) - Schematics para NestJS (Licencia MIT)
+- **@nestjs/testing** (^11.1.6) - Módulo de testing para NestJS (Licencia MIT)
+- **@types/express** (^5.0.3) - Definiciones de tipos para Express (Licencia MIT)
+- **@types/jest** (^30.0.0) - Definiciones de tipos para Jest (Licencia MIT)
+- **@types/jsonwebtoken** (^9.0.10) - Definiciones de tipos para jsonwebtoken (Licencia MIT)
+- **@types/multer** (^2.0.0) - Definiciones de tipos para Multer (Licencia MIT)
+- **@types/node** (^24.7.0) - Definiciones de tipos para Node.js (Licencia MIT)
+- **@types/supertest** (^6.0.3) - Definiciones de tipos para Supertest (Licencia MIT)
+- **@typescript-eslint/eslint-plugin** (^8.46.0) - Plugin de ESLint para TypeScript (Licencia MIT)
+- **@typescript-eslint/parser** (^8.46.0) - Parser de ESLint para TypeScript (Licencia BSD-2-Clause)
+- **dotenv** (^17.2.3) - Carga de variables de entorno desde `.env` (Licencia BSD-2-Clause)
+- **eslint** (^9.37.0) - Linting de JavaScript (Licencia MIT)
+- **eslint-config-prettier** (^10.1.8) - Configuración de ESLint para Prettier (Licencia MIT)
+- **eslint-plugin-import** (^2.32.0) - Plugin de ESLint para imports (Licencia MIT)
+- **eslint-plugin-prettier** (^5.5.4) - Plugin de ESLint para Prettier (Licencia MIT)
+- **eslint-plugin-security** (^3.0.1) - Reglas de seguridad para ESLint (Licencia MIT)
+- **jest** (^30.2.0) - Framework de testing (Licencia MIT)
+- **prettier** (^3.6.2) - Formateador de código opinionado (Licencia MIT)
+- **source-map-support** (^0.5.21) - Soporte para source maps en stack traces (Licencia MIT)
+- **supertest** (^7.1.4) - Biblioteca para testing de servidores HTTP (Licencia MIT)
+- **ts-jest** (^29.4.4) - Transformer de Jest para TypeScript (Licencia MIT)
+- **ts-loader** (^9.5.4) - Loader de TypeScript para Webpack (Licencia MIT)
+- **ts-node** (^10.9.2) - Ejecución de TypeScript en Node.js (Licencia MIT, con partes Apache-2.0 del compilador TS)
+- **tsconfig-paths** (^4.2.0) - Carga de módulos usando paths de tsconfig.json (Licencia MIT)
+- **typescript** (^5.9.3) - Compilador de TypeScript (Licencia Apache-2.0)
+
+### Dependencias de Desarrollo MAIN MS
+
+- **@eslint/js** (^9.37.0) - Implementación del lenguaje JavaScript para ESLint (Licencia MIT)
+- **@nestjs/cli** (^11.0.10) - CLI para NestJS (Licencia MIT)
+- **@nestjs/schematics** (^11.0.8) - Schematics para NestJS (Licencia MIT)
+- **@nestjs/testing** (^11.1.6) - Módulo de testing para NestJS (Licencia MIT)
+- **@types/jest** (^30.0.0) - Definiciones de tipos para Jest (Licencia MIT)
+- **@types/node** (^24.7.0) - Definiciones de tipos para Node.js (Licencia MIT)
+- **@types/passport-jwt** (^4.0.1) - Definiciones de tipos para passport-jwt (Licencia MIT)
+- **@types/supertest** (^6.0.3) - Definiciones de tipos para Supertest (Licencia MIT)
+- **@typescript-eslint/eslint-plugin** (^8.46.0) - Plugin de ESLint para TypeScript (Licencia MIT)
+- **@typescript-eslint/parser** (^8.46.0) - Parser de ESLint para TypeScript (Licencia BSD-2-Clause)
+- **cross-env** (^7.0.3) - Configuración de variables de entorno cross-platform (Licencia MIT)
+- **dotenv-cli** (^7.4.2) - Herramienta CLI para dotenv (Licencia MIT)
+- **eslint** (^9.37.0) - Linting de JavaScript (Licencia MIT)
+- **eslint-config-prettier** (^10.1.8) - Configuración de ESLint para Prettier (Licencia MIT)
+- **eslint-plugin-import** (^2.32.0) - Plugin de ESLint para imports (Licencia MIT)
+- **eslint-plugin-prettier** (^5.5.4) - Plugin de ESLint para Prettier (Licencia MIT)
+- **eslint-plugin-security** (^3.0.1) - Reglas de seguridad para ESLint (Licencia MIT)
+- **jest** (^30.2.0) - Framework de testing (Licencia MIT)
+- **prettier** (^3.6.2) - Formateador de código opinionado (Licencia MIT)
+- **source-map-support** (^0.5.21) - Soporte para source maps en stack traces (Licencia MIT)
+- **supertest** (^7.1.4) - Biblioteca para testing de servidores HTTP (Licencia MIT)
+- **ts-jest** (^29.4.4) - Transformer de Jest para TypeScript (Licencia MIT)
+- **ts-loader** (^9.5.4) - Loader de TypeScript para Webpack (Licencia MIT)
+- **ts-node** (^10.9.2) - Ejecución de TypeScript en Node.js (Licencia MIT, con partes Apache-2.0 del compilador TS)
+- **tsconfig-paths** (^4.2.0) - Carga de módulos usando paths de tsconfig.json (Licencia MIT)
+- **typescript** (^5.9.3) - Compilador de TypeScript (Licencia Apache-2.0)
+
+
 
 Todas las dependencias están licenciadas bajo licencias de código abierto permisivas (MIT, Apache 2.0, BSD, ISC) que son compatibles con nuestra licencia Apache 2.0.
 
