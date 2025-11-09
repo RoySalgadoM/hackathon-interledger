@@ -284,4 +284,5 @@ Estamos muy orgullosos de haber implementado con éxito un motor de reglas de pr
 Mirando hacia adelante, planeamos integrar características adicionales como soporte multiidioma (español, inglés, francés, alemán y portugués) para acomodar poblaciones turísticas diversas. Nos gustaría implementar notificaciones push para confirmaciones de transacciones y violaciones de reglas, agregar capacidades de pago sin conexión para áreas con conectividad limitada y expandir el panel de comerciantes para proporcionar análisis detallados e historial de pagos. La integración con billeteras digitales populares y el soporte para criptomonedas adicionales ampliaría el alcance de la plataforma. También visualizamos asociaciones con servicios de transporte, hoteles y atracciones turísticas para crear un ecosistema de pagos integral para la Copa Mundial 2026 y más allá.
 
 
+Para unn video demo y más:
 DRIVE: https://drive.google.com/drive/folders/1_EazxapVfPMB_9BCivi9oitvlemj98Dn?usp=sharing
