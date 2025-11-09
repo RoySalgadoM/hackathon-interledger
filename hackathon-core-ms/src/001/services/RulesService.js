@@ -7,7 +7,7 @@ const models = require(process.env.MODELS_PATH);
 //+VARS
 let filename = '' + Path.basename(__filename);
 
-//+HELPS
+//+HELPERS
 let ruleHelper = require(process.env.HELPERS_PATH + 'RuleHelper');
 
 module.exports = {

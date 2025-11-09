@@ -7,10 +7,13 @@ const constants = require(process.env.UTILS_PATH + 'constants');
 const util = require(process.env.UTILS_PATH + 'util');
 const responseUtil = require(process.env.UTILS_PATH + 'responseMessages');
 
+//+SERVICES
+const { coreService } = require('../services/index');
+
 module.exports = [
   {
     method: constants.POST,
-    path: `${process.env.CONTEXT_API}/evaluation`,
+    path: `${process.env.CONTEXT_API}/evaluate`,
     config: {
       description: 'Evaluar una transaccion',
       notes: ['Core', 'Evaluation'],
@@ -51,7 +54,7 @@ module.exports = [
       try {
         let initDate = moment();
         logManager.startProcess(req);
-        const response = { result: 'ok' };
+        const response = await coreService.evaluate(req, logManager.getUUID());
         logManager.endProcess(req, initDate);
         return h.response(response);
       } catch (error) {

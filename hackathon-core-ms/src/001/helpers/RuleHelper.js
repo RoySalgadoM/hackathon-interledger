@@ -77,4 +77,7 @@ const createEvaluation = (uuid, field, action, value, channels, logManager) => {
 
   return rule;
 };
+
+
+
 module.exports = { createRule, createEvaluation };
