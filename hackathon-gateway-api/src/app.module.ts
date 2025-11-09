@@ -13,7 +13,7 @@ import { RequestIdGuard } from './common/guards/request-id.guard';
 import configuration from './config/configuration';
 import { PaymentsModule } from './payments/payments.module';
 import { AuthModule } from './common/auth/auth.module';
-
+import { PreauthModule } from './preauth/preauth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -33,7 +33,8 @@ import { AuthModule } from './common/auth/auth.module';
     AuthModule,
     AdministrationModule,
     WelcomeModule,
-    PaymentsModule
+    PaymentsModule,
+    PreauthModule
   ],
   providers: [
     {
