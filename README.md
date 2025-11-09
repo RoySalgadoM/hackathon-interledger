@@ -85,14 +85,14 @@ Todas las dependencias están licenciadas bajo licencias de código abierto perm
 
 ## Miembros del equipo
 
-Diego Guido (diego.guido@exos.mx)
-Jose Enrique Gaona (jose-enrique.garcia@exos.mx)
-Mauricio Pérez (mauricio.perez@exos.mx)
-Roy Salgado (20203tn052@utez.edu.mx)
+- Diego Guido (diego.guido@exos.mx)
+- Jose Enrique Gaona (jose-enrique.garcia@exos.mx)
+- Mauricio Pérez (mauricio.perez@exos.mx)
+- Roy Salgado (20203tn052@utez.edu.mx)
 
 ## Aprendizajes
 
-Durante este hackathon, adquirimos experiencia valiosa trabajando con el protocolo Interledger para pagos transfronterizos y aprendimos cómo integrar flujos complejos de autorización de pagos en una interfaz fácil de usar. Descubrimos la importancia de equilibrar la seguridad con la usabilidad, especialmente al diseñar sistemas para turistas internacionales que pueden tener diferentes niveles de experiencia técnica. El desafío de implementar la generación y escaneo de códigos QR en tiempo real mientras se mantiene una validación segura de transacciones nos enseñó lecciones críticas sobre optimización de rendimiento frontend y gestión de estado en Vue 3.
+En solo 22 horas intensas, nos sumergimos en el mundo de Interledger y salimos con mucho más que código. Nos dividimos en dos equipos: backend (donde uno se enfocó en integrar las APIs de Interledger y otro en validar las reglas de pre-autorización) y frontend (dividiendo las vistas entre nosotros). El mayor reto fue diseñar una arquitectura de pre-autorización que fuera escalable, rápida y flexible, mientras aprendíamos sobre la marcha cómo funcionan los grants y las transacciones en Interledger. Definitivamente hubo momentos de frustración, como cuando no entendíamos para qué servía el parámetro `interact_ref` al intentar debitar entre cuentas, o cuando nos trabamos con la forma correcta de enviar los datos de pago. Pero esos "bugs de madrugada" fueron los que más nos enseñaron sobre el protocolo y la importancia de sincronizar confirmaciones bidireccionales. Al final, crear un QR dinámico con el monto preestablecido para facilitar el pago al usuario fue uno de esos momentos donde todo hizo click. Pasamos de no conocer prácticamente nada de pagos sin intermediarios a tener un sistema funcional que realmente podría ayudar a millones de turistas.
 
 ## Logros
 

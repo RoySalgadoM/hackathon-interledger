@@ -248,13 +248,13 @@ const handleQRScanned = async (data) => {
     qrError.value = null
     showErrorModal.value = false
 
-    // Preparar los datos del pago
-    const paymentData = {
-      qrData: data,
-    }
-
     // Llamar al store para procesar el pago
-    await paymentStore.processPayment(paymentData)
+    await paymentStore.processPayment({
+      merchant_account: data.url,
+      client_account: selectedPaymentMethod.value,
+      amount: data.amount,
+      id: data.id,
+    })
 
     // Si todo salió bien, guardar los datos del QR y mostrar modal de éxito
     qrData.value = data

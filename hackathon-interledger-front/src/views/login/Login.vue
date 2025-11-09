@@ -218,7 +218,7 @@ export default {
       }
       try {
         this.isLoading = true
-        const response = await axiosInstance.get('/api/v1/administration/auth/login', {
+        const response = await axiosInstance.get('/administration/auth/login', {
           params: {
             email: this.email,
             password: this.password,

@@ -23,6 +23,11 @@ const router = createRouter({
           component: () => import('@/views/payment/Payment.vue'),
         },
         {
+          path: 'payment/data',
+          name: 'paymentResult',
+          component: () => import('@/views/payment/DataPayment.vue'),
+        },
+        {
           path: 'products',
           name: 'products',
           component: () => import('@/views/products/ListProducts.vue'),

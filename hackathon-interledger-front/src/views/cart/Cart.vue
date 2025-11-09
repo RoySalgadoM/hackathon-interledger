@@ -28,6 +28,15 @@
         <div class="cart-header">
           <h2 class="cart-title">Carrito de compras</h2>
         </div>
+        <div class="p-4">
+          <e-select
+            v-model="selectedWallet"
+            :options="wallets"
+            label="Selecciona una billetera para recibir el pago"
+            required
+            class="w-full"
+          />
+        </div>
         <div class="cart-items">
           <article class="cart-item" v-for="p in products" :key="p.id">
             <div class="item-image">
@@ -96,9 +105,12 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import { useCartStore } from '@/stores/cart'
+import { v4 as uuidv4 } from 'uuid'
+import { useWalletStore } from '@/stores/wallet'
 
+const walletStore = useWalletStore()
 const cartStore = useCartStore()
 
 const products = computed(() => cartStore.products)
@@ -109,10 +121,21 @@ const formattedSubtotal = computed(() => {
 const showPaymentModal = ref(false)
 const paymentData = ref(null)
 
+const selectedWallet = ref('')
+const wallets = computed(() => walletStore.wallets)
+
+onMounted(() => {
+  selectedWallet.value = wallets.value?.length > 0 ? wallets.value[0].value : ''
+})
+
+watch(wallets.value, (newVal) => {
+  selectedWallet.value = newVal[0].value
+})
+
 const handleProceedToPayment = () => {
   paymentData.value = {
-    id: '1234567890',
-    url: 'https://example.com',
+    id: uuidv4(),
+    url: selectedWallet.value,
     amount: formattedSubtotal.value,
   }
   showPaymentModal.value = true

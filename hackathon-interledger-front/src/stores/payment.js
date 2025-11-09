@@ -14,13 +14,16 @@ export const usePaymentStore = defineStore('payment', () => {
       loading.value = true
       error.value = null
 
+      const { merchant_account, client_account, amount, id } = paymentData
+
       const response = await APIFactory.post({
-        path: '/api/v1/payments/payment-request',
-        body: paymentData,
+        path: `payments/payment-request?merchant_account=${merchant_account}&client_account=${client_account}&amount=${amount}`,
+        headers: {
+          'x-request-id': id,
+        },
       })
 
-      paymentResponse.value = response.data
-      return response.data
+      window.location.href = response.data.data.redirect_url
     } catch (err) {
       console.error('Error al procesar el pago:', err)
 

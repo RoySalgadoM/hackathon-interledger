@@ -1,11 +1,17 @@
 import axios from 'axios'
+import { v4 as uuidv4 } from 'uuid'
 
 // Create axios instance with base configuration
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000/api/v1/',
-  timeout: 10000,
+  timeout: 100000,
   headers: {
     'Content-Type': 'application/json',
+  },
+  maxRedirects: 0, // Don't follow redirects automatically
+  validateStatus: function (status) {
+    // Accept 2xx and 3xx status codes as valid responses
+    return status >= 200 && status < 400
   },
 })
 
@@ -20,11 +26,9 @@ axiosInstance.interceptors.request.use(
       }
     }
 
-    // Generate and add x-request-id UUID v4 if not already set
-    if (!config.headers['x-request-id']) {
-      const requestId = crypto.randomUUID()
-      config.headers['x-request-id'] = requestId
-    }
+    // Generate and add x-request-id UUID v4
+    const requestId = uuidv4()
+    config.headers['x-request-id'] = config.headers['x-request-id'] || requestId
 
     return config
   },
@@ -36,6 +40,26 @@ axiosInstance.interceptors.request.use(
 // Response interceptor
 axiosInstance.interceptors.response.use(
   (response) => {
+    // Handle 302 redirect responses specifically
+    if (response.status === 302) {
+      const redirectUrl = response.headers.location || response.headers.Location
+
+      if (redirectUrl) {
+        console.log('302 Redirect detected, redirecting to:', redirectUrl)
+        // Perform client-side redirect to avoid CORS issues
+        window.location.href = redirectUrl
+        // Return a pending promise to prevent further processing
+        return new Promise(() => {})
+      }
+    }
+
+    // Check if response data contains a redirectUrl field
+    if (response.data && response.data.redirectUrl) {
+      console.log('Redirecting to:', response.data.redirectUrl)
+      window.location.href = response.data.redirectUrl
+      return new Promise(() => {})
+    }
+
     return response
   },
   (error) => {
