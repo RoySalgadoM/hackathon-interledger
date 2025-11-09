@@ -169,7 +169,7 @@ export const useRulesStore = defineStore('rules', () => {
     try {
       loading.value = true
       const payload = {
-        _id: id,
+        id: id,
         state: !ruleData.state,
       }
       const response = await APIFactory.post({
