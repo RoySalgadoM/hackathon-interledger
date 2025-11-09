@@ -123,11 +123,22 @@ export class PaymentsService {
           `Preauth validation failed for request_id: ${requestId}`
         );
 
-        await this.paymentsDatabaseService.updatePayment(requestId, {
+        const paymentData = {
+          request_id: requestId,
+          client_account: createPaymentDto.client_account,
+          merchant_account: createPaymentDto.merchant_account,
+          amount: String(createPaymentDto.amount),
+          formatted_amount: createPaymentDto.amount,
+          date: requestTimestampDateFormatted,
+          time: requestTimestampTimeFormatted,
+          request_timestamp: new Date(requestTimestamp),
+          response_timestamp: new Date(),
           payment_status: 'rejected_by_preauth'
-        });
+        };
 
-        return this.responseService.generateResponseOk(
+        await this.paymentsDatabaseService.createPayment(paymentData);
+
+        return this.responseService.generateResponseConflictWithData(
           request,
           {
             rejection_rule: preauthResponse.data.data.rule

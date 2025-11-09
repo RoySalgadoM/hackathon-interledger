@@ -13,7 +13,7 @@ const APIFactory = {
    */
   async get(payload) {
     const config = {
-      headers: { ...payload.headers, 'x-request-id': crypto.randomUUID() },
+      headers: { ...payload.headers },
     }
 
     // Agregar token si está disponible
@@ -44,7 +44,7 @@ const APIFactory = {
    */
   async post(payload) {
     const config = {
-      headers: { ...payload.headers, 'x-request-id': crypto.randomUUID() },
+      headers: { ...payload.headers },
     }
 
     // Agregar token si está disponible
@@ -75,7 +75,7 @@ const APIFactory = {
    */
   async put(payload) {
     const config = {
-      headers: { ...payload.headers, 'x-request-id': crypto.randomUUID() },
+      headers: { ...payload.headers },
     }
 
     // Agregar token si está disponible
@@ -106,7 +106,7 @@ const APIFactory = {
    */
   async patch(payload) {
     const config = {
-      headers: { ...payload.headers, 'x-request-id': crypto.randomUUID() },
+      headers: { ...payload.headers },
     }
 
     // Agregar token si está disponible
@@ -137,7 +137,7 @@ const APIFactory = {
    */
   async delete(payload) {
     const config = {
-      headers: { ...payload.headers, 'x-request-id': crypto.randomUUID() },
+      headers: { ...payload.headers },
     }
 
     // Agregar token si está disponible
@@ -169,7 +169,7 @@ const APIFactory = {
   async getFile(payload) {
     const config = {
       responseType: 'arraybuffer',
-      headers: { ...payload.headers, 'x-request-id': crypto.randomUUID() },
+      headers: { ...payload.headers },
     }
 
     // Agregar token si está disponible

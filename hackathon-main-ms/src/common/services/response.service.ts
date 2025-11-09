@@ -140,6 +140,29 @@ export class ResponseService {
     };
   }
 
+  
+  /**
+   * Generate conflict response (409)
+   */
+  generateResponseConflictWithData(
+    request: FastifyRequest,
+    data: object = {},
+    title: string = 'Conflict',
+    description: string = RESPONSE_MESSAGES.CONFLICT
+  ): ApiResponse {
+    const requestId = this.getRequestId(request);
+
+    return {
+      message: {
+        title: title,
+        description: description
+      },
+      code: RESPONSE_CODES.CONFLICT,
+      request_id: requestId,
+      data: data
+    };
+  }
+
   /**
    * Generate service unavailable response (503)
    */

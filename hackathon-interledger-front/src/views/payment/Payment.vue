@@ -263,7 +263,7 @@ const handleQRScanned = async (data) => {
   } catch (error) {
     console.error('Error al procesar el pago:', error)
     // El error ya está manejado en el store
-    qrError.value = paymentStore.error
+    qrError.value = error.response.data.data.rejection_rule
     qrData.value = null
     showErrorModal.value = true
   }

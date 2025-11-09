@@ -23,25 +23,11 @@ export const usePaymentStore = defineStore('payment', () => {
         },
       })
 
+      console.log('response', response.data.data.redirect_url)
+
       window.location.href = response.data.data.redirect_url
-    } catch (err) {
-      console.error('Error al procesar el pago:', err)
-
-      // Manejar diferentes tipos de errores
-      if (err.response) {
-        // El servidor respondió con un código de estado de error
-        error.value =
-          err.response.data?.message || `Error ${err.response.status}: ${err.response.statusText}`
-      } else if (err.request) {
-        // La petición se hizo pero no se recibió respuesta
-        error.value = 'Error de conexión: No se pudo conectar con el servidor'
-      } else {
-        // Algo más causó el error
-        error.value = `Error: ${err.message}`
-      }
-
-      paymentResponse.value = null
-      throw err
+    } catch (error) {
+      throw error
     } finally {
       loading.value = false
     }
