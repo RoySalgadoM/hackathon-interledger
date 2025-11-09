@@ -11,7 +11,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/login.vue'),
+      component: () => import('@/views/login/Login.vue'),
     },
     {
       path: '/admin',
@@ -21,6 +21,11 @@ const router = createRouter({
           path: 'dashboard',
           name: 'dashboard',
           component: () => import('@/views/Dashboard.vue'),
+        },
+        {
+          path: 'products',
+          name: 'products',
+          component: () => import('@/views/products/ListProducts.vue'),
         },
       ],
     },

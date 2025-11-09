@@ -178,11 +178,6 @@
         </div>
       </div>
     </div>
-    <div class="w-full py-5 flex justify-center relative z-10">
-      <div class="text-secondary-3 text-sm text-center">
-        © 2025 Kapital Bank. Todos los derechos reservados.
-      </div>
-    </div>
   </div>
 </template>
 
@@ -204,7 +199,7 @@ export default {
       setTimeout(() => {
         this.isLoading = false
         // Redirección después de login exitoso
-        this.$router.push({ name: 'menu' })
+        this.$router.push({ name: 'products' })
       }, 1500)
     },
   },
