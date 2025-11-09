@@ -6,7 +6,7 @@
     <header
       class="bg-gray-800 text-white p-4 shadow-md md:col-span-3 flex items-center justify-between"
     >
-      <h1 class="text-xl font-semibold">Header</h1>
+      <h1 class="text-xl font-semibold">WWWalock</h1>
       <button
         class="md:hidden p-2 rounded hover:bg-gray-700 transition-colors"
         @click="toggleSidebar"

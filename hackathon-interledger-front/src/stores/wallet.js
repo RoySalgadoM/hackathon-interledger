@@ -6,6 +6,20 @@ export const useWalletStore = defineStore('wallet', () => {
   // State
   const wallets = ref([])
   const loading = ref(false)
+  const whiteWallets = ref([
+    {
+      value: 'https://ilp.interledger-test.dev/my-usd-acc',
+      label: 'My USD Account',
+    },
+    {
+      value: 'https://ilp.interledger-test.dev/tlacoyos',
+      label: 'Comida',
+    },
+    {
+      value: 'https://ilp.interledger-test.dev/a48c31c8',
+      label: 'Carrito de compras',
+    },
+  ])
 
   // Actions
   const getWallets = async () => {
@@ -37,6 +51,7 @@ export const useWalletStore = defineStore('wallet', () => {
     // State
     wallets,
     loading,
+    whiteWallets,
     // Actions
     getWallets,
   }

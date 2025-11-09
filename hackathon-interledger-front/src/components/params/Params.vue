@@ -202,7 +202,7 @@
               <td>
                 <e-select
                   :modelValue="param.value"
-                  :options="rulesStore.whitelistOptions"
+                  :options="walletStore.whiteWallets"
                   @update:modelValue="handleSetValue(param.index, 'value', $event)"
                   placeholder="Seleccionar whitelist"
                   required
@@ -252,6 +252,7 @@
 <script setup>
 import { ref, computed, onBeforeMount, defineProps, defineEmits, defineExpose } from 'vue'
 import { useRulesStore } from '@/stores/rules'
+import { useWalletStore } from '@/stores/wallet'
 
 const props = defineProps({
   modelValue: {
@@ -267,6 +268,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const rulesStore = useRulesStore()
+const walletStore = useWalletStore()
 const paramsList = ref([])
 const isFormActive = ref(false)
 const originalValueParam = ref(null)
@@ -324,7 +326,7 @@ const getLabelOperator = (parameter, value) => {
 
 // Get label for whitelist
 const getLabelWhitelist = (value) => {
-  const whitelist = rulesStore.whitelistOptions.find((element) => element.value == value)
+  const whitelist = walletStore.whiteWallets.find((element) => element.value == value)
   return whitelist ? whitelist.label : value
 }
 
