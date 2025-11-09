@@ -1,10 +1,10 @@
 <template>
   <div
-    class="fixed inset-0 overflow-hidden flex flex-col bg-linear-to-r from-black from-0% via-black via-25% to-(--color-primary) to-100%"
+    class="fixed inset-0 overflow-hidden flex flex-col bg-linear-to-r from-black from-0% via-black via-25% to-primary to-100%"
   >
     <div class="absolute top-0 right-0 w-40 h-84 rounded-full bg-black blur-[160px] -mt-50"></div>
     <div
-      class="absolute bottom-0 left-0 w-40 h-84 rounded-full bg-(--color-primary) blur-[140px] -ml-40 -mb-40"
+      class="absolute bottom-0 left-0 w-40 h-84 rounded-full bg-primary blur-[140px] -ml-40 -mb-40"
     ></div>
     <div class="flex-1 flex justify-center items-center">
       <div class="flex w-[80%] h-[70%] overflow-hidden">
@@ -116,54 +116,60 @@
                   Ingresa tus credenciales para continuar
                 </div>
               </div>
-              <div class="space-y-6">
-                <EInput
-                  v-model="email"
-                  label="Email"
-                  label-color="text-white"
-                  placeholder="Ingresa tu email"
-                  required
-                />
-                <EInput
-                  v-model="password"
-                  type="password"
-                  label-color="text-white"
-                  label="Contraseña"
-                  placeholder="Ingresa tu contraseña"
-                  required
-                />
-                <EBtn
-                  variant="primary"
-                  :loading="isLoading"
-                  class="w-full h-12 mt-6 font-medium shadow-lg transition-all rounded-lg duration-300 text-black bg-neutral-white hover:bg-primary-2"
-                  @click="handleLogin"
-                >
-                  <span v-if="!isLoading">Iniciar sesión</span>
-                  <span v-else class="flex items-center justify-center">
-                    <svg
-                      class="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        class="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        stroke-width="4"
-                      ></circle>
-                      <path
-                        class="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Procesando...
-                  </span>
-                </EBtn>
-              </div>
+              <form @submit.prevent="handleSubmit" class="w-full" novalidate>
+                <div class="space-y-6">
+                  <EInput
+                    v-model="email"
+                    label="Email"
+                    label-color="text-white"
+                    placeholder="Ingresa tu email"
+                    required
+                  />
+                  <EInput
+                    v-model="password"
+                    type="password"
+                    label-color="text-white"
+                    label="Contraseña"
+                    placeholder="Ingresa tu contraseña"
+                    required
+                  />
+                  <!-- Error Message -->
+                  <div v-if="errorMessage" class="text-red-600 p-3">
+                    {{ errorMessage }}
+                  </div>
+                  <EBtn
+                    variant="primary"
+                    :loading="isLoading"
+                    class="w-full h-12 mt-6 font-medium shadow-lg transition-all rounded-lg duration-300 text-black bg-neutral-white hover:bg-primary-2"
+                    type="submit"
+                  >
+                    <span v-if="!isLoading">Iniciar sesión</span>
+                    <span v-else class="flex items-center justify-center">
+                      <svg
+                        class="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          class="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          stroke-width="4"
+                        ></circle>
+                        <path
+                          class="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Procesando...
+                    </span>
+                  </EBtn>
+                </div>
+              </form>
 
               <div class="flex justify-center w-full py-4">
                 <router-link
@@ -192,13 +198,26 @@ export default {
       email: '',
       password: '',
       isLoading: false,
+      errorMessage: '',
     }
   },
   computed: {},
   methods: {
-    async handleLogin() {
-      this.isLoading = true
+    async handleSubmit() {
+      this.errorMessage = ''
+
+      // Validate form
+      if (!this.email.trim()) {
+        this.errorMessage = 'El email es requerido'
+        return
+      }
+
+      if (!this.password.trim()) {
+        this.errorMessage = 'La contraseña es requerida'
+        return
+      }
       try {
+        this.isLoading = true
         const response = await axiosInstance.get('/api/v1/administration/auth/login', {
           params: {
             email: this.email,
@@ -219,7 +238,7 @@ export default {
       } catch (error) {
         console.error('Login error:', error)
         // Show error message to user
-        alert('Error al iniciar sesión. Por favor verifica tus credenciales.')
+        this.errorMessage = error.response?.data?.message || 'Error al iniciar sesión'
       } finally {
         this.isLoading = false
       }

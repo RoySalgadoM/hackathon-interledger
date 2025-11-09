@@ -48,6 +48,10 @@
             />
           </div>
 
+          <p class="text-sm text-text-secondary-2">
+            La transacción no se permitirá si se cumple alguna de las condiciones.
+          </p>
+
           <!-- Params Component -->
           <div>
             <e-params ref="paramsForm" v-model="paramsList" />

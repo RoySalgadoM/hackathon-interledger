@@ -184,7 +184,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { usePaymentStore } from '@/stores/payment'
 import { useCartStore } from '@/stores/cart'
 import { useWalletStore } from '@/stores/wallet'
@@ -207,6 +207,25 @@ const paymentMethods = computed(() => walletStore.wallets)
 const selectWallet = (value) => {
   selectedPaymentMethod.value = value
 }
+
+watch(
+  () => paymentMethods.value,
+  (newWallets) => {
+    if (newWallets.length > 0 && !selectedPaymentMethod.value) {
+      selectedPaymentMethod.value = newWallets[0].value
+    }
+  },
+  { immediate: true },
+)
+onMounted(async () => {
+  try {
+    if (paymentMethods.value.length > 0 && !selectedPaymentMethod.value) {
+      selectedPaymentMethod.value = paymentMethods.value[0].value
+    }
+  } catch (error) {
+    console.error('Error al cargar wallets:', error)
+  }
+})
 
 const handlePay = () => {
   validated.value = true
