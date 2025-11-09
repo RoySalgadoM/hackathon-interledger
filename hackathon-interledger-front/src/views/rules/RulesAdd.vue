@@ -206,8 +206,8 @@ const handleSubmit = async () => {
       alert('Regla creada exitosamente')
     }
 
-    // Redirect to rules list or dashboard
-    router.push({ name: 'dashboard' })
+    // Redirect to rules list or rulesAdd
+    router.push({ name: 'rulesAdd' })
   } catch (error) {
     console.error('Error saving rule:', error)
     errorMessage.value = error.response?.data?.message || 'Error al guardar la regla'
@@ -229,7 +229,7 @@ const handleDelete = async () => {
     loading.value = true
     await rulesStore.deleteRule(route.params.id)
     alert('Regla eliminada exitosamente')
-    router.push({ name: 'dashboard' })
+    router.push({ name: 'rulesAdd' })
   } catch (error) {
     console.error('Error deleting rule:', error)
     errorMessage.value = 'Error al eliminar la regla'

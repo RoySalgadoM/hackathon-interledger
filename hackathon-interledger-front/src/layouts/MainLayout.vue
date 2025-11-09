@@ -45,12 +45,6 @@
           >
             Reglas
           </button>
-          <button
-            @click="navigateTo('whitelistQuery')"
-            class="block w-full text-left p-2 rounded hover:bg-gray-200 transition-colors"
-          >
-            Listas blancas
-          </button>
         </nav>
       </div>
     </aside>

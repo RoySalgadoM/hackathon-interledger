@@ -38,6 +38,11 @@ const router = createRouter({
           component: () => import('@/views/cart/Cart.vue'),
         },
         {
+          path: 'cart/confirm',
+          name: 'cartConfirm',
+          component: () => import('@/views/cart/Confirm.vue'),
+        },
+        {
           path: 'rules',
           name: 'rulesQuery',
           component: () => import('@/views/rules/RulesQuery.vue'),

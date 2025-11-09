@@ -1,117 +1,123 @@
 <template>
-  <e-content-layout>
-    <template #title>
-      <h1>Carrito</h1>
-    </template>
-    <template #description>
-      <p>Productos en tu carrito</p>
-    </template>
-    <template #tr-content>
-      <div class="flex flex-col items-end gap-2 w-full">
-        <label class="text-sm font-semibold text-secondary"
-          >Subtotal ({{ products.length == 1 ? '1 producto' : `${products.length} productos` }}):
-          ${{ formattedSubtotal }}</label
-        >
-        <e-btn variant="primary" @click="handleProceedToPayment" class="w-full md:w-auto">
-          <span>
-            <i class="fa-solid fa-cart-shopping"></i>
-          </span>
-          <span> Proceder al pago </span>
-        </e-btn>
-      </div>
-    </template>
-    <template #default>
-      <div v-if="products.length === 0" class="empty-cart">
-        <p>Tu carrito está vacío</p>
-      </div>
-      <div v-else class="cart-container">
-        <div class="cart-header">
-          <h2 class="cart-title">Carrito de compras</h2>
+  <div>
+    <e-content-layout>
+      <template #title>
+        <h1>Carrito</h1>
+      </template>
+      <template #description>
+        <p>Productos en tu carrito</p>
+      </template>
+      <template #tr-content>
+        <div class="flex flex-col items-end gap-2 w-full">
+          <label class="text-sm font-semibold text-secondary"
+            >Subtotal ({{ products.length == 1 ? '1 producto' : `${products.length} productos` }}):
+            ${{ formattedSubtotal }}</label
+          >
+          <e-btn variant="primary" @click="handleProceedToPayment" class="w-full md:w-auto">
+            <span>
+              <i class="fa-solid fa-cart-shopping"></i>
+            </span>
+            <span> Proceder al pago </span>
+          </e-btn>
         </div>
-        <div class="p-4">
-          <e-select
-            v-model="selectedWallet"
-            :options="wallets"
-            label="Selecciona una billetera para recibir el pago"
-            required
-            class="w-full"
-          />
+      </template>
+      <template #default>
+        <div v-if="products.length === 0" class="empty-cart">
+          <p>Tu carrito está vacío</p>
         </div>
-        <div class="cart-items">
-          <article class="cart-item" v-for="p in products" :key="p.id">
-            <div class="item-image">
-              <img :src="p.image" :alt="p.title" />
-            </div>
-            <div class="item-content">
-              <div class="item-description">
-                <h3 class="item-title">{{ p.title }}</h3>
-                <p class="item-description">{{ p.desc }}</p>
+        <div v-else class="cart-container">
+          <div class="cart-header">
+            <h2 class="cart-title">Carrito de compras</h2>
+          </div>
+          <div class="p-4">
+            <e-select
+              v-model="selectedWallet"
+              :options="wallets"
+              label="Selecciona una billetera para recibir el pago"
+              required
+              class="w-full"
+            />
+          </div>
+          <div class="cart-items">
+            <article class="cart-item" v-for="p in products" :key="p.id">
+              <div class="item-image">
+                <img :src="p.image" :alt="p.title" />
               </div>
-              <div class="item-price">
-                <span class="price">${{ p.price.toFixed(2) }}</span>
-              </div>
-              <div class="item-quantity">
-                <div class="quantity-controls">
-                  <button
-                    @click="
-                      p.quantity > 1
-                        ? cartStore.decrementQuantity(p.id)
-                        : cartStore.removeProduct(p.id)
-                    "
-                    class="quantity-btn"
-                    :aria-label="
-                      p.quantity > 1 ? `Disminuir cantidad de ${p.title}` : `Eliminar ${p.title}`
-                    "
-                  >
-                    <span v-if="p.quantity > 1" class="material-symbols-outlined">remove</span>
-                    <span v-else class="material-symbols-outlined">delete</span>
-                  </button>
-                  <span class="quantity-value">{{ p.quantity }}</span>
-                  <button
-                    @click="cartStore.incrementQuantity(p.id)"
-                    class="quantity-btn"
-                    :aria-label="`Aumentar cantidad de ${p.title}`"
-                  >
-                    <span class="material-symbols-outlined">add</span>
-                  </button>
+              <div class="item-content">
+                <div class="item-description">
+                  <h3 class="item-title">{{ p.title }}</h3>
+                  <p class="item-description">{{ p.desc }}</p>
+                </div>
+                <div class="item-price">
+                  <span class="price">${{ p.price.toFixed(2) }}</span>
+                </div>
+                <div class="item-quantity">
+                  <div class="quantity-controls">
+                    <button
+                      @click="
+                        p.quantity > 1
+                          ? cartStore.decrementQuantity(p.id)
+                          : cartStore.removeProduct(p.id)
+                      "
+                      class="quantity-btn"
+                      :aria-label="
+                        p.quantity > 1 ? `Disminuir cantidad de ${p.title}` : `Eliminar ${p.title}`
+                      "
+                    >
+                      <span v-if="p.quantity > 1" class="material-symbols-outlined">remove</span>
+                      <span v-else class="material-symbols-outlined">delete</span>
+                    </button>
+                    <span class="quantity-value">{{ p.quantity }}</span>
+                    <button
+                      @click="cartStore.incrementQuantity(p.id)"
+                      class="quantity-btn"
+                      :aria-label="`Aumentar cantidad de ${p.title}`"
+                    >
+                      <span class="material-symbols-outlined">add</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
+        </div>
+      </template>
+    </e-content-layout>
+
+    <!-- Modal de pago con QR -->
+    <e-modal v-model="showPaymentModal" title="Proceder al pago" @close="handleCloseModal">
+      <div class="payment-modal-content">
+        <div class="payment-info">
+          <p class="payment-amount">
+            Total a pagar: <strong>${{ formattedSubtotal }}</strong>
+          </p>
+          <p class="payment-instructions">
+            Escanea el código QR con tu aplicación de pago para completar la transacción
+          </p>
+        </div>
+        <div class="qr-container" v-if="paymentData">
+          <e-qr-code :data="paymentData" mode="generate" :size="300" error-correction-level="M" />
         </div>
       </div>
-    </template>
-  </e-content-layout>
-
-  <!-- Modal de pago con QR -->
-  <e-modal v-model="showPaymentModal" title="Proceder al pago" @close="handleCloseModal">
-    <div class="payment-modal-content">
-      <div class="payment-info">
-        <p class="payment-amount">
-          Total a pagar: <strong>${{ formattedSubtotal }}</strong>
-        </p>
-        <p class="payment-instructions">
-          Escanea el código QR con tu aplicación de pago para completar la transacción
-        </p>
-      </div>
-      <div class="qr-container" v-if="paymentData">
-        <e-qr-code :data="paymentData" mode="generate" :size="300" error-correction-level="M" />
-      </div>
-    </div>
-    <template #footer>
-      <e-btn variant="secondary" @click="handleCloseModal">Cancelar</e-btn>
-    </template>
-  </e-modal>
+      <template #footer>
+        <e-btn variant="secondary" @click="handleCloseModal">Cancelar</e-btn>
+      </template>
+    </e-modal>
+  </div>
 </template>
 
 <script setup>
-import { computed, ref, watch, onMounted } from 'vue'
+import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useCartStore } from '@/stores/cart'
 import { v4 as uuidv4 } from 'uuid'
 import { useWalletStore } from '@/stores/wallet'
+import { useRouter } from 'vue-router'
+import { usePaymentStore } from '@/stores/payment'
 
 const walletStore = useWalletStore()
 const cartStore = useCartStore()
+const paymentStore = usePaymentStore()
+const router = useRouter()
 
 const products = computed(() => cartStore.products)
 const formattedSubtotal = computed(() => {
@@ -120,6 +126,7 @@ const formattedSubtotal = computed(() => {
 
 const showPaymentModal = ref(false)
 const paymentData = ref(null)
+const pollingInterval = ref(null)
 
 const selectedWallet = ref('')
 const wallets = computed(() => walletStore.wallets)
@@ -132,6 +139,45 @@ watch(wallets.value, (newVal) => {
   selectedWallet.value = newVal[0].value
 })
 
+// Función para verificar el estado del pago
+const checkPaymentStatus = async (requestId) => {
+  const status = await paymentStore.verifyPaymentStatus(requestId)
+
+  // Si el estado es diferente de "pending", detener el polling y redirigir
+  if (status && status !== 'pending') {
+    stopPolling()
+    router.push({
+      name: 'cartConfirm',
+      query: {
+        status: status,
+        requestId: requestId,
+      },
+    })
+  }
+}
+
+// Iniciar el polling
+const startPolling = (requestId) => {
+  // Limpiar cualquier polling previo
+  stopPolling()
+
+  // Primera verificación inmediata
+  checkPaymentStatus(requestId)
+
+  // Configurar polling cada 2 segundos
+  pollingInterval.value = setInterval(() => {
+    checkPaymentStatus(requestId)
+  }, 2000)
+}
+
+// Detener el polling
+const stopPolling = () => {
+  if (pollingInterval.value) {
+    clearInterval(pollingInterval.value)
+    pollingInterval.value = null
+  }
+}
+
 const handleProceedToPayment = () => {
   paymentData.value = {
     id: uuidv4(),
@@ -139,11 +185,21 @@ const handleProceedToPayment = () => {
     amount: formattedSubtotal.value,
   }
   showPaymentModal.value = true
+
+  // Iniciar el polling después de abrir el modal
+  startPolling(paymentData.value.id)
 }
 
 const handleCloseModal = () => {
   showPaymentModal.value = false
+  // Detener el polling cuando se cierra el modal
+  stopPolling()
 }
+
+// Limpiar el polling cuando el componente se desmonte
+onBeforeUnmount(() => {
+  stopPolling()
+})
 </script>
 
 <style scoped>

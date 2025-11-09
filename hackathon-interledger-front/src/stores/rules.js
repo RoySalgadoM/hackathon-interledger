@@ -14,9 +14,9 @@ export const useRulesStore = defineStore('rules', () => {
     { label: 'Monto', value: 0 },
     { label: 'Rango de monto', value: 1 },
     { label: 'Días', value: 2 },
-    { label: 'Rango de hora', value: 4 },
-    { label: 'Monto total', value: 9 },
-    { label: 'Cantidad de transacciones', value: 10 },
+    { label: 'Rango de hora', value: 3 },
+    { label: 'Monto total', value: 4 },
+    { label: 'Cantidad de transacciones', value: 5 },
   ])
 
   const ruleChannels = ref([

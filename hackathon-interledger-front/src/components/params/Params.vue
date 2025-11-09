@@ -48,7 +48,7 @@
               <td>
                 <div class="value-inputs-container">
                   <!-- Days field with multiple selection -->
-                  <template v-if="param.field == 2">
+                  <template v-if="param.field === 2">
                     <div class="days-selection">
                       <label
                         v-for="day in rulesStore.daysList"
@@ -71,39 +71,27 @@
                   </template>
 
                   <!-- Range fields (Monto, Hora) -->
-                  <template v-else-if="param.field == 1 || param.field == 4">
+                  <template v-else-if="param.field === 1 || param.field === 3">
                     <e-input
                       :modelValue="param.value"
                       @update:modelValue="handleSetValue(param.index, 'value', $event)"
-                      :placeholder="param.field == 1 ? 'Valor inicial' : 'Hora inicial (HH:MM)'"
-                      :type="param.field == 1 ? 'number' : 'text'"
-                      :maxlength="param.field == 4 ? 5 : undefined"
+                      :placeholder="param.field === 1 ? 'Valor inicial' : 'Hora inicial (HH:MM)'"
+                      :type="param.field === 1 ? 'number' : 'text'"
+                      :maxlength="param.field === 3 ? 5 : undefined"
                       required
                     />
                     <e-input
                       :modelValue="param.secondValue"
                       @update:modelValue="handleSetValue(param.index, 'secondValue', $event)"
-                      :placeholder="param.field == 1 ? 'Valor final' : 'Hora final (HH:MM)'"
-                      :type="param.field == 1 ? 'number' : 'text'"
-                      :maxlength="param.field == 4 ? 5 : undefined"
+                      :placeholder="param.field === 1 ? 'Valor final' : 'Hora final (HH:MM)'"
+                      :type="param.field === 1 ? 'number' : 'text'"
+                      :maxlength="param.field === 3 ? 5 : undefined"
                       required
                     />
                   </template>
 
-                  <!-- Hour field -->
-                  <template v-else-if="param.field == 3">
-                    <e-input
-                      :modelValue="param.value"
-                      @update:modelValue="handleSetValue(param.index, 'value', $event)"
-                      placeholder="HH:MM"
-                      type="text"
-                      :maxlength="5"
-                      required
-                    />
-                  </template>
-
-                  <!-- Number fields: Monto (0), Monto total (9), Cantidad (10) -->
-                  <template v-else-if="param.field == 0 || param.field == 9 || param.field == 10">
+                  <!-- Number fields: Monto (0), Monto total (4), Cantidad (5) -->
+                  <template v-else-if="param.field === 0 || param.field === 4 || param.field === 5">
                     <e-input
                       :modelValue="param.value"
                       @update:modelValue="handleSetValue(param.index, 'value', $event)"
@@ -128,7 +116,7 @@
               <td>
                 <div class="flex gap-2 items-center justify-center flex-wrap">
                   <!-- Days as chips -->
-                  <template v-if="param.field == 2 && Array.isArray(param.value)">
+                  <template v-if="param.field === 2 && Array.isArray(param.value)">
                     <span v-for="(dayValue, idx) in param.value" :key="idx" class="value-chip">
                       {{ formatDayValue(dayValue) }}
                     </span>
@@ -288,7 +276,7 @@ const indexEdit = ref(null)
 const conditionsList = computed(() => {
   const list = paramsList.value
     .map((element, index) => ({ ...element, index }))
-    .filter((element) => element.field !== 11)
+    .filter((element) => element.field !== 6)
 
   console.log('conditionsList computed, length:', list.length, 'list:', list)
   return list
@@ -297,7 +285,7 @@ const conditionsList = computed(() => {
 const whiteList = computed(() => {
   return paramsList.value
     .map((element, index) => ({ ...element, index }))
-    .filter((element) => element.field == 11)
+    .filter((element) => element.field === 6)
 })
 
 // Get operator options based on field type - Make it reactive per param
@@ -306,16 +294,15 @@ const getOperatorOptions = computed(() => {
     if (field == null || field == undefined) return []
     console.log('field in catlog operators', field)
     switch (field) {
-      case 0: // Monto
-      case 3: // Hora
+      case 0: // amount - Monto
         return rulesStore.operatorsAmountAndHour
-      case 9: // Monto total
-      case 10: // Cantidad de transacciones
+      case 4: // accumulates - Monto total
+      case 5: // tx_accumulates - Cantidad de transacciones
         return rulesStore.operatorsTotalAmountAndTransactionNum
-      case 1: // Rango de monto
-      case 4: // Rango de hora
+      case 1: // range_amount - Rango de monto
+      case 3: // range_hour - Rango de hora
         return rulesStore.operatorsRange
-      case 2: // Días
+      case 2: // days - Días
       default:
         return rulesStore.operatorsComparations
     }
@@ -349,7 +336,7 @@ const formatDayValue = (value) => {
 
 // Format value for display
 const formatValue = (field, value) => {
-  if (field == 2) {
+  if (field === 2) {
     // Days field - handle array of days
     if (Array.isArray(value)) {
       return value
@@ -434,7 +421,7 @@ const handleNewException = () => {
   }
 
   paramsList.value.unshift({
-    field: 11,
+    field: 6,
     action: null,
     value: null,
     channels: ['POS'], // Always set to POS
@@ -460,7 +447,7 @@ const handleEdit = (index) => {
   // If editing a range type, split the value into value and secondValue
   const param = paramsList.value[index]
   if (
-    (param.field == 1 || param.field == 4) &&
+    (param.field === 1 || param.field === 3) &&
     Array.isArray(param.value) &&
     param.value.length == 2
   ) {
@@ -509,7 +496,7 @@ const handleConfirm = (index) => {
   }
 
   // Validate value based on field type
-  if (param.field == 2) {
+  if (param.field === 2) {
     // Days must have at least one selected
     if (!param.value || (Array.isArray(param.value) && param.value.length == 0)) {
       alert('Por favor seleccione al menos un día')
@@ -521,7 +508,7 @@ const handleConfirm = (index) => {
   }
 
   // For range types, validate secondValue
-  if ((param.field == 1 || param.field == 4) && !param.secondValue && param.secondValue !== 0) {
+  if ((param.field === 1 || param.field === 3) && !param.secondValue && param.secondValue !== 0) {
     alert('Por favor ingrese el valor final del rango')
     return
   }
@@ -535,7 +522,7 @@ const handleConfirm = (index) => {
   }
 
   // Combine value and secondValue for range types before saving
-  if (param.field === 1 || param.field === 4) {
+  if (param.field === 1 || param.field === 3) {
     param.value = [param.value, param.secondValue]
     delete param.secondValue
   }
@@ -605,7 +592,7 @@ onBeforeMount(() => {
     }
 
     if (
-      (element.field === 1 || element.field === 4) &&
+      (element.field === 1 || element.field === 3) &&
       Array.isArray(element.value) &&
       element.value.length === 2
     ) {

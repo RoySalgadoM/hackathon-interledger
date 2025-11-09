@@ -7,6 +7,7 @@ export const usePaymentStore = defineStore('payment', () => {
   const loading = ref(false)
   const paymentResponse = ref(null)
   const error = ref(null)
+  const paymentStatus = ref(null)
 
   // Actions
   const processPayment = async (paymentData) => {
@@ -36,6 +37,26 @@ export const usePaymentStore = defineStore('payment', () => {
   const clearPayment = () => {
     paymentResponse.value = null
     error.value = null
+    paymentStatus.value = null
+  }
+
+  const verifyPaymentStatus = async (requestId) => {
+    try {
+      const response = await APIFactory.get({
+        path: `payments/payment-verification?request_id=${requestId}`,
+      })
+
+      if (response?.data?.data?.payment_status) {
+        paymentStatus.value = response.data.data.payment_status
+        return response.data.data.payment_status
+      }
+
+      return null
+    } catch (err) {
+      console.error('Error al verificar el estado del pago:', err)
+      error.value = err.message || 'Error al verificar el pago'
+      return null
+    }
   }
 
   return {
@@ -43,8 +64,10 @@ export const usePaymentStore = defineStore('payment', () => {
     loading,
     paymentResponse,
     error,
+    paymentStatus,
     // Actions
     processPayment,
     clearPayment,
+    verifyPaymentStatus,
   }
 })
