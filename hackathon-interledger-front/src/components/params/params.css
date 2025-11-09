@@ -1,0 +1,161 @@
+.params-container {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.params-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.params-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.params-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.params-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.params-table thead {
+  background-color: #1f2937;
+  color: white;
+}
+
+.params-table th {
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.params-table td {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.params-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.params-table tbody tr.editing-row {
+  background-color: #f3f4f6;
+}
+
+.params-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.params-action-icon {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.params-action-icon:hover {
+  transform: scale(1.1);
+}
+
+.params-action-icon.edit {
+  color: #3b82f6;
+}
+
+.params-action-icon.delete {
+  color: #ef4444;
+}
+
+.params-action-icon.confirm {
+  color: #10b981;
+}
+
+.params-action-icon.cancel {
+  color: #6b7280;
+}
+
+.params-section-divider {
+  margin: 30px 0;
+  border-top: 2px solid #e5e7eb;
+}
+
+.params-section-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.value-inputs-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.days-selection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  background-color: #f9fafb;
+}
+
+.day-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0.25rem;
+}
+
+.day-checkbox input[type='checkbox'] {
+  cursor: pointer;
+}
+
+.day-checkbox:hover {
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
+
+.value-chip {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-1) 100%);
+  color: var(--color-text-primary);
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0.15rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .params-table {
+    font-size: 12px;
+  }
+
+  .params-table th,
+  .params-table td {
+    padding: 8px 12px;
+  }
+}

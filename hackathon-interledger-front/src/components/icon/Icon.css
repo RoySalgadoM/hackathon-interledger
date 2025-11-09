@@ -1,0 +1,53 @@
+.icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+  vertical-align: middle;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+/* Sizes */
+.icon--small {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon--medium {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon--large {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.icon--xlarge {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+/* Filled variant uses font-variation-settings defined in the component */
+.icon--filled {
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}

@@ -6,11 +6,6 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/Home.vue'),
-    },
-    {
-      path: '/login',
-      name: 'login',
       component: () => import('@/views/login/Login.vue'),
     },
     {
@@ -26,6 +21,21 @@ const router = createRouter({
           path: 'products',
           name: 'products',
           component: () => import('@/views/products/ListProducts.vue'),
+        },
+        {
+          path: 'rules',
+          name: 'rulesQuery',
+          component: () => import('@/views/rules/RulesQuery.vue'),
+        },
+        {
+          path: 'rules/add',
+          name: 'rulesAdd',
+          component: () => import('@/views/rules/RulesAdd.vue'),
+        },
+        {
+          path: 'rules/:id',
+          name: 'rulesEdit',
+          component: () => import('@/views/rules/RulesAdd.vue'),
         },
       ],
     },
