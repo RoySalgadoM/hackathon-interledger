@@ -1,6 +1,10 @@
 ﻿import { Injectable } from '@nestjs/common';
 import { PaymentsDatabaseService } from './payments-database.service';
-import { CreatePaymentDto, PaymentCallbackDto } from './dto/payments.dto';
+import {
+  CreatePaymentDto,
+  PaymentCallbackDto,
+  PaymentVerificationDto
+} from './dto/payments.dto';
 import { ResponseService } from '../common/services/response.service';
 import { ApiResponse } from '../common/types/api-response.interface';
 import type { AuthenticatedFastifyRequest } from '../types/fastify-request';
@@ -221,12 +225,61 @@ export class PaymentsService {
     }
   }
 
+  async paymentVerification(
+    paymentVerificationDto: PaymentVerificationDto,
+    request: AuthenticatedFastifyRequest
+  ) {
+    try {
+      const payment = await this.paymentsDatabaseService.getPayment(
+        paymentVerificationDto.request_id
+      );
+
+      if (!payment) {
+        return this.responseService.generateResponseError(
+          request,
+          'Payment not found'
+        );
+      }
+
+      return this.responseService.generateResponseOk(
+        request,
+        {
+          payment_status: payment.payment_status
+        },
+        'Payment verified successfully',
+        'Payment verified successfully'
+      );
+    } catch (err) {
+      this.loggerService.printError(
+        'Error in payment verification',
+        err instanceof Error ? err.stack : String(err)
+      );
+      return this.responseService.generateResponseError(
+        request,
+        'Error in payment verification'
+      );
+    }
+  }
+
   async paymentCallback(
     createPaymentDto: PaymentCallbackDto,
     request: AuthenticatedFastifyRequest,
     response: FastifyReply
   ) {
     try {
+      if (createPaymentDto.result !== 'success') {
+        let uiSuccessUrl =
+          this.configService.get<string>('uiSuccessUrl') +
+          '?request_id=' +
+          createPaymentDto.request_id +
+          '&result=' +
+          createPaymentDto.result;
+
+        response.status(302);
+        response.header('Location', uiSuccessUrl);
+        response.send();
+      }
+
       const privateKey = fs.readFileSync('private.key', 'utf-8');
 
       const payment = await this.paymentsDatabaseService.getPayment(
@@ -270,8 +323,7 @@ export class PaymentsService {
       );
 
       await this.paymentsDatabaseService.updatePayment(payment.request_id, {
-        payment_status: 'completed',
-        response_timestamp: new Date()
+        payment_status: 'completed'
       });
 
       let uiSuccessUrl =

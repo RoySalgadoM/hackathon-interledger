@@ -14,7 +14,11 @@ import { Public } from '@/common/decorators/public.decorator';
 import { LoggingInterceptor } from '@/common/interceptors/logging.interceptor';
 import { ActivityLoggingInterceptor } from '@/common/interceptors/activity-logging.interceptor';
 import { LogActivity } from '@/common/decorators/log-activity.decorator';
-import { CreatePaymentDto, PaymentCallbackDto } from './dto/payments.dto';
+import {
+  CreatePaymentDto,
+  PaymentCallbackDto,
+  PaymentVerificationDto
+} from './dto/payments.dto';
 import { FastifyReply } from 'fastify';
 
 @ApiTags('Payments')
@@ -50,6 +54,24 @@ export class PaymentsController {
       createPaymentDto,
       request,
       response
+    );
+  }
+
+  @Get('payment-verification')
+  @ApiOperation({ summary: 'Verify a payment' })
+  @LogActivity({
+    description: {
+      es: 'Verificar un pago',
+      en: 'Verify a payment'
+    }
+  })
+  async paymentVerification(
+    @Query() paymentVerificationDto: PaymentVerificationDto,
+    @Req() request: AuthenticatedFastifyRequest
+  ) {
+    return await this.paymentsService.paymentVerification(
+      paymentVerificationDto,
+      request
     );
   }
 

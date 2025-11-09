@@ -1,4 +1,4 @@
-﻿import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
+﻿import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePaymentDto {
@@ -27,6 +27,16 @@ export class CreatePaymentDto {
   amount: number;
 }
 
+export class PaymentVerificationDto {
+  @ApiProperty({
+    description: 'Request ID',
+    example: '1234567890'
+  })
+  @IsString()
+  @IsNotEmpty()
+  request_id: string;
+}
+
 export class PaymentCallbackDto {
   @ApiProperty({
     description: 'Merchant Account',
@@ -34,6 +44,7 @@ export class PaymentCallbackDto {
   })
   @IsString()
   @IsNotEmpty()
+  @IsOptional()
   interact_ref: string;
 
   @ApiProperty({
@@ -50,5 +61,15 @@ export class PaymentCallbackDto {
   })
   @IsString()
   @IsNotEmpty()
+  @IsOptional()
   hash: string;
+
+  @ApiProperty({
+    description: 'Result',
+    example: 'success'
+  })
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  result: string;
 }
