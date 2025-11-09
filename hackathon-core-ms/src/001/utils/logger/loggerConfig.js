@@ -1,10 +1,8 @@
 //+LIBS
-const { createLogger, format, transports } = require(
-  process.env.NODE_LIBS_PATH + 'winston'
-);
+const { createLogger, format, transports } = require('winston');
 //+VARS
 const { combine, timestamp, printf, errors, colorize, align } = format;
-const pjson = require(process.env.SYSTEM_PATH + 'package.json');
+const pjson = require('../../../../package.json');
 const version = pjson.version;
 // const customFormat = () => {
 //   const formatter = (info) => {

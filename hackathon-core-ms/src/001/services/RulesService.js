@@ -2,13 +2,13 @@
 //+LIBS
 const Path = require('path');
 //+UTILS
-const constants = require(process.env.UTILS_PATH + 'constants');
-const models = require(process.env.MODELS_PATH);
+const constants = require('../utils/constants');
+const models = require('../models/index');
 //+VARS
 let filename = '' + Path.basename(__filename);
 
 //+HELPERS
-let ruleHelper = require(process.env.HELPERS_PATH + 'RuleHelper');
+let ruleHelper = require('../helpers/RuleHelper');
 
 module.exports = {
   createRule: async function (req, uuid) {

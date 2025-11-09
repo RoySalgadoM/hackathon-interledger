@@ -1,5 +1,5 @@
 'use strict';
-let mongoose = require(process.env.NODE_LIBS_PATH + 'mongoose');
+let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const RulesModel = new Schema(

@@ -1,4 +1,4 @@
-const constants = require(process.env.UTILS_PATH + 'constants');
+const constants = require('../utils/constants');
 const version = '1.0.3';
 
 module.exports = {

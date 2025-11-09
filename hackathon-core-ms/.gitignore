@@ -5,6 +5,7 @@
 
 # Node artifact files
 node_modules/
+node_modules/dotenv/
 dist/
 
 # Compiled Java class files
@@ -47,3 +48,4 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+/dotenv

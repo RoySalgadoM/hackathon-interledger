@@ -1,7 +1,7 @@
-const { v4: uuidv4 } = require(process.env.NODE_LIBS_PATH + 'uuid');
-const moment = require(process.env.NODE_LIBS_PATH + 'moment');
-const logger = require(process.env.UTILS_PATH + '/logger/loggerConfig');
-const constants = require(process.env.UTILS_PATH + 'constants');
+const { v4: uuidv4 } = require('uuid');
+const moment = require('moment');
+const logger = require('./loggerConfig');
+const constants = require('../constants');
 const { loggerSchemas } = require('../../schemas/index');
 
 module.exports = class LogManager {

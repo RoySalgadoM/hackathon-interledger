@@ -1,11 +1,11 @@
 //+LIBS
 const moment = require('moment');
-const Joi = require(process.env.NODE_LIBS_PATH + 'joi');
+const Joi = require('joi');
 
 //+UTILS
-const constants = require(process.env.UTILS_PATH + 'constants');
-const util = require(process.env.UTILS_PATH + 'util');
-const responseUtil = require(process.env.UTILS_PATH + 'responseMessages');
+const constants = require('../utils/constants');
+const util = require('../utils/Util');
+const responseUtil = require('../utils/responseMessages');
 
 //+SERVICES
 const { coreService } = require('../services/index');

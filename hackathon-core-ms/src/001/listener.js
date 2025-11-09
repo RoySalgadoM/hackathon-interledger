@@ -1,20 +1,21 @@
 //+ LIBS
-const Hapi = require(process.env.NODE_LIBS_PATH + '@hapi/hapi');
-const HapiSwagger = require(process.env.NODE_LIBS_PATH + 'hapi-swagger');
-const Inert = require(process.env.NODE_LIBS_PATH + '@hapi/inert');
-const Vision = require(process.env.NODE_LIBS_PATH + '@hapi/vision');
+require('dotenv').config();
+const Hapi = require('@hapi/hapi');
+const HapiSwagger = require('hapi-swagger');
+const Inert = require('@hapi/inert');
+const Vision = require('@hapi/vision');
 const Path = require('path');
-const mongoose = require(process.env.NODE_LIBS_PATH + 'mongoose');
+const mongoose = require('mongoose');
 //+ UTILS
-const logger = require(process.env.UTILS_PATH + 'logger/loggerConfig');
-const statusAppUtil = require(process.env.UTILS_PATH + 'StatusAppUtil');
-const util = require(process.env.UTILS_PATH + 'Util');
-const responseUtil = require(process.env.UTILS_PATH + 'responseMessages');
+const logger = require('./utils/logger/loggerConfig');
+const statusAppUtil = require('./utils/StatusAppUtil');
+const util = require('./utils/Util');
+const responseUtil = require('./utils/responseMessages');
 
 //+ SECURITY
 
 //+ ROUTES
-const routes = require(process.env.ROUTES_PATH + process.env.ROUTE_PATH);
+const routes = require('../001/routes/api/index');
 
 let filename = '' + Path.basename(__filename);
 process.env.APP_VERSION = statusAppUtil.getVersionApp();
@@ -24,7 +25,7 @@ if (process.env.LOG_LEVEL !== undefined) {
 }
 
 //Version
-const pjson = require(process.env.SYSTEM_PATH + 'package.json');
+const pjson = require('../../package.json');
 const version = pjson.version;
 const MONGO_URI = process.env.MONGODB_URL;
 

@@ -1,5 +1,5 @@
 //+UTILS
-const constants = require(process.env.UTILS_PATH + 'constants');
+const constants = require('../utils/constants');
 
 const createRule = async (uuid, rule, logManager) => {
   try {

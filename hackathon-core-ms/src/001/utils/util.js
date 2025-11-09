@@ -1,11 +1,11 @@
 //+LIBS
-const moment = require(process.env.NODE_LIBS_PATH + 'moment');
-const jwt = require(process.env.NODE_LIBS_PATH + 'jsonwebtoken');
+const moment = require('moment');
+const jwt = require('jsonwebtoken');
 const Path = require('path');
 //+UTILS
-const LogManager = require(process.env.UTILS_PATH + '/logger/loggerFormat');
-const constants = require(process.env.UTILS_PATH + 'constants');
-const logger = require(process.env.UTILS_PATH + '/logger/loggerConfig');
+const LogManager = require('../utils/logger/loggerFormat');
+const constants = require('../utils/constants');
+const logger = require('../utils/logger/loggerConfig');
 //+VARS
 let filename = '' + Path.basename(__filename);
 

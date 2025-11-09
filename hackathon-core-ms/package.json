@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/001/listener.js",
+    "start": "node -r dotenv/config src/001/listener.js",
     "lint": "npx eslint --ext .js . --fix"
   },
   "dependencies": {

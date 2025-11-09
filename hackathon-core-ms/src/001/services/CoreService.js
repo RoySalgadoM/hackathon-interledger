@@ -1,13 +1,13 @@
 //+LIBS
 const Path = require('path');
 //+UTILS
-const constants = require(process.env.UTILS_PATH + 'constants');
+const constants = require('../utils/constants');
 const { inspect } = require('util');
 //+VARS
 let filename = '' + Path.basename(__filename);
 
 //+HELPERS
-let coreHelper = require(process.env.HELPERS_PATH + 'CoreHelper');
+let coreHelper = require('../helpers/CoreHelper');
 
 module.exports = {
   evaluate: async function (req, uuid) {
