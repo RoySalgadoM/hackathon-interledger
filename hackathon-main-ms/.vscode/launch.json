@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug NestJS App",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/@nestjs/cli/bin/nest.js",
+      "args": ["start", "--debug", "--watch"],
+      "env": {
+        "NODE_ENV": "development",
+        "CONTEXT_API": "/api",
+        "MONGODB_URI": "mongodb://kapital-dev:QlESbNGRiOuzTPez6bNlQrA9HAT53ys3iM-MtlBmiRsP_srn@ae490561-41f9-40dc-9b35-a2efe97835e6.nam5.firestore.goog:443/kapital-dev?loadBalanced=true&tls=true&authMechanism=SCRAM-SHA-256&retryWrites=false",
+        "FRONTEND_URL": "http://localhost:4100/portal",
+        "JWT_SECRET": "pr_x4_TM_MbwRPPEvwYIvKe00tE7Qh4m84wYwj9eWt_DKma7Gtn771xQQy2KKqLO",
+        "JWT_ALGORITHM": "HS256",
+        "MAX_TOKEN_AGE": "3600",
+        "JWT_AUD": "api://default",
+        "JWT_ISS": "interledger-hackathon",
+        "AUDIENCE": "api://default",
+        "LOG_LEVEL": "debug",
+        "LOG_FORMAT": "raw",
+        "PORT": "3001"
+      },
+      "console": "integratedTerminal",
+      "restart": true,
+      "skipFiles": ["<node_internals>/**"],
+      "killBehavior": "forceful",
+      "preLaunchTask": "start:clean"
+    },
+    {
+      "name": "Debug NestJS App (Production)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/dist/main.js",
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}

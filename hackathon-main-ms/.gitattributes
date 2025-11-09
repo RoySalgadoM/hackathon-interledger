@@ -1,0 +1,26 @@
+# Configuración de line endings para el proyecto
+# Todos los archivos de texto usan CRLF (Windows)
+* text=auto eol=crlf
+
+# Archivos específicos que deben mantener LF
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Archivos binarios
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+
+# Archivos de configuración específicos
+package-lock.json text eol=crlf
+yarn.lock text eol=lf
